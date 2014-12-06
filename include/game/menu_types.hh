@@ -3,10 +3,10 @@
 
 enum menu_type
 {
-  BEGIN,
-  GAME,
-  PAUSE,
-  OVER
+  BEGINM,
+  GAMEM,
+  PAUSEM,
+  OVERM
 };
 
 #endif /* !MENU_TYPES_HH_ */
