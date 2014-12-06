@@ -10,6 +10,7 @@
 # include <memory>
 
 # include "type.hh"
+# include "portal.hh"
 # include "../../include/point.hh"
 
 class Map
@@ -31,6 +32,7 @@ class Map
   private:
     void gen_case_map_();
     void gen_path_();
+    void gen_portal_(int nop);
 
     void gen_sprite_();
     void gen_case_sprite_();
@@ -40,7 +42,9 @@ class Map
     std::vector<std::vector<Type>> case_;
     sf::Uint8* buf_;
 
-    Point p;
+    Point nexus_;
+    std::vector<Portal> portals;
+
     int width_;
     int height_;
 };
