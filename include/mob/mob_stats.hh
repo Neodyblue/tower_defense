@@ -11,6 +11,10 @@ public:
   MStats& operator-=(MStats& other);
   MStats& operator-(MStats& other);
 
+  int get_health() const;
+  int get_speed() const;
+  bool is_flying() const;
+
 private:
   int health_;
   int speed_;

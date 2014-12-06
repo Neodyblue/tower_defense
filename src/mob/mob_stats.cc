@@ -31,3 +31,18 @@ MStats& MStats::operator-(MStats& other)
 
   return *this;
 }
+
+int MStats::get_health() const
+{
+  return health_;
+}
+
+int MStats::get_speed() const
+{
+  return speed_;
+}
+
+bool MStats::is_flying() const
+{
+  return fly_;
+}
