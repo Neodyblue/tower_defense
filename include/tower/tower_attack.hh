@@ -9,10 +9,10 @@ class TAttack
 public:
   TAttack(T origin, M target, MStats diff, int zone);
 
-  T& get_origin() const;
-  M& get_target() const;
-  MStats& get_diff() const;
-  int& get_zone() const;
+  T& get_origin();
+  M& get_target();
+  MStats& get_diff();
+  int& get_zone();
 
 private:
   T origin_;

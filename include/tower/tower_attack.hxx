@@ -12,25 +12,25 @@ TAttack<T, M>::TAttack(T origin, M target, MStats diff, int zone)
 {}
 
 template<class T, class M>
-T& TAttack<T, M>::get_origin() const
+T& TAttack<T, M>::get_origin()
 {
   return origin_;
 }
 
 template<class T, class M>
-M& TAttack<T, M>::get_target() const
+M& TAttack<T, M>::get_target()
 {
   return target_;
 }
 
 template<class T, class M>
-MStats& TAttack<T, M>::get_diff() const
+MStats& TAttack<T, M>::get_diff()
 {
   return diff_;
 }
 
 template<class T, class M>
-int& TAttack<T, M>::get_zone() const
+int& TAttack<T, M>::get_zone()
 {
   return zone_;
 }
