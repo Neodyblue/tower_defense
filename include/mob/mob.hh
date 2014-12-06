@@ -9,7 +9,7 @@ class Mob : public Entity
 public:
   Mob(Point pos, MStats base_stats); /* FIXME add sprite */
   virtual ~Mob() override;
-  MStats& get_stats();
+  MStats get_stats();
 
 private:
   MStats stats_;

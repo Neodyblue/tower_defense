@@ -8,7 +8,7 @@ Mob::Mob(Point pos, MStats base_stats) /* FIXME add sprite */
 Mob::~Mob()
 {}
 
-MStats& Mob::get_stats()
+MStats Mob::get_stats()
 {
   return stats_;
 }
