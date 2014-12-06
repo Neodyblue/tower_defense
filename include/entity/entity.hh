@@ -10,6 +10,7 @@ public:
   virtual ~Entity();
 
   Point& get_pos();
+  void set_pos(Point pos);
   virtual void draw(/*FIXME param SFML */);
 
 protected:
