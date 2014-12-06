@@ -4,7 +4,7 @@
 
 int main()
 {
-    auto v = Gen::Generate(10, 10, 5);
+    auto v = Gen::Generate(10, 10, 6);
     unsigned width = v->size();
     unsigned height = (*v)[0].size();
     sf::RenderWindow window(sf::VideoMode(width, height), "Test.");
