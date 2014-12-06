@@ -1,0 +1,19 @@
+#ifndef ENTITY_HH
+# define ENTITY_HH
+
+# include "point.hh"
+
+class Entity
+{
+public:
+  Entity(Point pos); /* FIXME add sprite */
+  virtual ~Entity();
+
+  virtual void draw(/*FIXME param SFML */);
+
+private:
+  Point pos_;
+  /* FIXME type */ int sprite_;
+};
+
+#endif /* end of include guard: ENTITY_HH */
