@@ -44,12 +44,7 @@ Map::Map(int width, int height, int iter)
                map_[x][y] = Type::FOREST;
        }
     }
-}
-
-
-void Map::draw(sf::RenderWindow& window)
-{
-    sf::Uint8* buf = new sf::Uint8[width_ * height_ * 4];
+    buf = new sf::Uint8[width_ * height_ * 4];
     for (int x = 0; x < width_; x++)
         for (int y = 0; y < height_; y++)
         {
@@ -59,12 +54,20 @@ void Map::draw(sf::RenderWindow& window)
             get_color(map_[x][y], r, g, b);
             buf[(x + y * width_) * 4 + 3] = 255;
         }
+}
+
+Map::~Map()
+{
+    delete[] buf;
+}
+
+void Map::draw(sf::RenderWindow& window)
+{
     sf::Texture texture;
     texture.create(width_, height_);
-    sprite_ = sf::Sprite(texture);
+    sf::Sprite sprite_ = sf::Sprite(texture);
     texture.update(buf);
     window.draw(sprite_);
-    delete[] buf;
 }
 
 void Map::get_color(Type t, sf::Uint8& r, sf::Uint8& g, sf::Uint8& b)
