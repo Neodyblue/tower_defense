@@ -2,7 +2,7 @@
 # define BUTTON_HH_
 
 # include <vector>
-# include <SFML/graphics.hpp>
+# include <SFML/Graphics.hpp>
 # include "game/action_types.hh"
 
 /**
@@ -13,15 +13,20 @@
 class Button
 {
 public:
-  Button();
+  Button() = default;
   Button(enum action action, sf::Vector2f pos,
-         sf::Shape shape, sf::Text text);
+         sf::RectangleShape shape, sf::Text text);
 
-  virtual ~Button();
+  enum action get_action() const;
+
+  void draw(sf::RenderWindow& window);
+  bool contains(sf::Vector2f vect);
+
+  virtual ~Button() = default;
 
 private:
   sf::Vector2f position_;
-  sf::Shape shape_;
+  sf::RectangleShape shape_;
   sf::Text text_;
   bool is_click_;
   enum action action_;
