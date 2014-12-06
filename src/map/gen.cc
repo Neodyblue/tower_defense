@@ -9,20 +9,16 @@ Gen::Gen(int width, int height)
 {
     tab_ = std::make_shared<std::vector<std::vector<unsigned>>>();
     tab_->resize(width);
-    for (int x = 0; x < height; x++)
+    for (int x = 0; x < width; x++)
         (*tab_)[x].resize(height);
 }
 
 void Gen::init_()
 {
-    srand(time(NULL));
     for (int x = 0; x < width_; x++)
         for (int y = 0; y < height_; y++)
         {
-            if (x == 0 || y == 0 || x == width_ - 1 || y == height_ - 1)
-                (*tab_)[x][y] = 255;
-            else
-                (*tab_)[x][y] = std::rand() % 255;
+            (*tab_)[x][y] = std::rand() % 255;
         }
 }
 
@@ -30,7 +26,7 @@ void Gen::split_()
 {
     auto new_tab = std::make_shared<std::vector<std::vector<unsigned>>>();
     new_tab->resize(2 * width_);
-    for (int x = 0; x < 2 * height_; x++)
+    for (int x = 0; x < 2 * width_; x++)
         (*new_tab)[x].resize(2 * height_);
     for (int x = 0; x < width_; x++)
         for (int y = 0; y < height_; y++)
@@ -49,7 +45,7 @@ void Gen::merge_()
 {
     auto new_tab = std::make_shared<std::vector<std::vector<unsigned>>>();
     new_tab->resize(width_);
-    for (int x = 0; x < height_; x++)
+    for (int x = 0; x < width_; x++)
         (*new_tab)[x].resize(height_);
     for (int x = 0; x < width_; x++)
         for (int y = 0; y < height_; y++)
