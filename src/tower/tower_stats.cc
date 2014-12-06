@@ -37,3 +37,23 @@ TStats& TStats::operator-(TStats& other)
 
   return *this;
 }
+
+const int get_damages() const
+{
+  return damages_;
+}
+
+const int get_range() const
+{
+  return range_;
+}
+
+const int get_radius() const
+{
+  return range_;
+}
+
+const int get_cooldown() const
+{
+  return cooldown_;
+}

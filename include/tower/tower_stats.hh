@@ -11,6 +11,11 @@ public:
   TStats& operator-=(TStats& other);
   TStats& operator-(TStats& other);
 
+  const int get_damages() const;
+  const int get_range() const;
+  const int get_radius() const;
+  const int get_cooldown() const;
+
 private:
   int damages_;
   int range_;
