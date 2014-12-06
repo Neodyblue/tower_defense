@@ -11,6 +11,8 @@
 # include "tower/tower_attack.hh"
 # include "entity/entity.hh"
 
+class Mob;
+
 class Tower : public Entity
 {
 public:
@@ -19,14 +21,14 @@ public:
         tower_type type,
         tower_target_type target_type); /* FIXME add sprite */
 
-  std::shared_ptr<Mob> get_target() ;
+  std::shared_ptr<Mob> get_target();
   void set_target(std::shared_ptr<Mob> mob);
   bool is_target_reachable();
-  TStats& get_base_stats() ;
-  TStats& get_real_stats() ;
-  int get_level() ;
-  tower_type& get_type() ;
-  tower_target_type& get_target_type() ;
+  TStats& get_base_stats();
+  TStats& get_real_stats();
+  int get_level();
+  tower_type& get_type();
+  tower_target_type& get_target_type();
   std::shared_ptr<TAttack<Tower, Mob>> attack();
 
 private:
