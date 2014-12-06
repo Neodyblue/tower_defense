@@ -4,7 +4,10 @@
 # include "tower/tower_attack.hh"
 
 template<class T, class M>
-TAttack<T, M>::TAttack(T origin, M target, MStats diff, int zone)
+TAttack<T, M>::TAttack(T& origin,
+                       std::shared_ptr<M> target,
+                       MStats diff,
+                       int zone)
   : origin_(origin)
   , target_(target)
   , diff_(diff)
@@ -18,7 +21,7 @@ T& TAttack<T, M>::get_origin()
 }
 
 template<class T, class M>
-M& TAttack<T, M>::get_target()
+std::shared_ptr<M> TAttack<T, M>::get_target()
 {
   return target_;
 }
