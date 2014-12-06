@@ -91,14 +91,14 @@ void Map::gen_portal_(int nop)
     old = kind;
     for (int k = 0; k < 3 + rand() % 15; k++)
     {
-      Point n = portals[nop].path[portals[nop].path.size() - 1];
+      Point n = portals_[nop].path[portals_[nop].path.size() - 1];
       n += p;
       if (Type::NONE <= get_case(n.get_x(), n.get_y()))
         break;
-      portals[nop].path.push_back(n);
+      portals_[nop].path.push_back(n);
       case_[n.get_x()][n.get_y()] = Type::ROAD;
     }
-    Point n = portals[nop].path[portals[nop].path.size() - 1];
+    Point n = portals_[nop].path[portals_[nop].path.size() - 1];
     n += p;
     if (Type::NONE == get_case(n.get_x(), n.get_y()))
       break;
@@ -116,8 +116,8 @@ void Map::gen_path_()
   Point p;
   for (int i = 0; i < 4; i++)
   {
-    portals.push_back(Portal());
-    portals[i].path.push_back(nexus_);
+    portals_.push_back(Portal());
+    portals_[i].path.push_back(nexus_);
     if (i == 0)
       p = Point(1, 0);
     else if (i == 1)
@@ -128,11 +128,11 @@ void Map::gen_path_()
       p = Point(0, -1);
     for (int k = 0; k < 6; k++)
     {
-      Point n = portals[i].path[portals[i].path.size() - 1];
+      Point n = portals_[i].path[portals_[i].path.size() - 1];
       n += p;
       if (Type::NONE <= get_case(n.get_x(), n.get_y()))
         break;
-      portals[i].path.push_back(n);
+      portals_[i].path.push_back(n);
       case_[n.get_x()][n.get_y()] = Type::ROAD;
     }
     gen_portal_(i);
@@ -198,11 +198,11 @@ void Map::draw(sf::RenderWindow& window)
   c.a = 100;
   rectangle.setFillColor(c);
   /*Draw path*/
-  for (unsigned i = 0; i < portals.size(); i++)
-    for (unsigned j = 0; j < portals[i].path.size(); j++)
+  for (unsigned i = 0; i < portals_.size(); i++)
+    for (unsigned j = 0; j < portals_[i].path.size(); j++)
     {
-      rectangle.setPosition(CASE_SIZE * portals[i].path[j].get_x(),
-                            CASE_SIZE * portals[i].path[j].get_y());
+      rectangle.setPosition(CASE_SIZE * portals_[i].path[j].get_x(),
+                            CASE_SIZE * portals_[i].path[j].get_y());
       window.draw(rectangle);
     }
   rectangle.setPosition(CASE_SIZE * nexus_.get_x(),
@@ -268,6 +268,22 @@ Point Map::and_get()
   return Point(nexus_.get_x() * CASE_SIZE + CASE_SIZE / 2,
                nexus_.get_y() * CASE_SIZE + CASE_SIZE / 2);
 }
+
+Point Map::get_next(Point& p)
+{
+  Point current(p.get_x() / CASE_SIZE, p.get_y() / CASE_SIZE);
+  Point next;
+  for (unsigned i = 0; i < portals_.size(); i++)
+    for (unsigned j = 0; j < portals_[i].path.size(); i++)
+      if (portals_[i].path[j] == current)
+      {
+        next = portals_[i].path[j];
+        break;
+      }
+  return Point(next.get_x() * CASE_SIZE + CASE_SIZE / 2,
+               next.get_y() * CASE_SIZE + CASE_SIZE / 2);
+}
+
 void Map::get_color(Type t, sf::Uint8& r, sf::Uint8& g, sf::Uint8& b)
 {
   if (t == Type::PROFONDSEA)

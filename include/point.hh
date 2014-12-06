@@ -7,6 +7,7 @@ public:
   Point(int x = 0, int y = 0);
 
   Point& operator+=(Point& other);
+  bool operator==(Point& other);
   Point& operator+(Point& other);
   Point& operator-=(Point& other);
   Point& operator-(Point& other);

@@ -35,6 +35,7 @@ class Map
     bool can_build(Point& p, tower_type t);
     Point get_build_position(Point& p);
     Point and_get();
+    Point get_next(Point& p);
 
   private:
     void gen_case_map_();
@@ -50,7 +51,7 @@ class Map
     sf::Uint8* buf_;
 
     Point nexus_;
-    std::vector<Portal> portals;
+    std::vector<Portal> portals_;
 
     int width_;
     int height_;

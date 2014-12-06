@@ -12,6 +12,11 @@ Point& Point::operator+=(Point& other)
   return *this + other;
 }
 
+bool Point::operator==(Point& other)
+{
+  return x_ == other.x_ && y_ == other.y_;
+}
+
 Point& Point::operator+(Point& other)
 {
   x_ += other.x_;
