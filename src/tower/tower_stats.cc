@@ -38,22 +38,22 @@ TStats& TStats::operator-(TStats& other)
   return *this;
 }
 
-const int get_damages() const
+int TStats::get_damages() const
 {
   return damages_;
 }
 
-const int get_range() const
+int TStats::get_range() const
 {
   return range_;
 }
 
-const int get_radius() const
+int TStats::get_radius() const
 {
   return range_;
 }
 
-const int get_cooldown() const
+int TStats::get_cooldown() const
 {
   return cooldown_;
 }
