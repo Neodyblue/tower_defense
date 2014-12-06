@@ -11,7 +11,7 @@
 
 # include "type.hh"
 # include "portal.hh"
-# include "../../include/point.hh"
+# include "point.hh"
 
 class Map
 {

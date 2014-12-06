@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "map.hh"
+#include "map/map.hh"
 
 int main()
 {

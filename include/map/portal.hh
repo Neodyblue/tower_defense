@@ -4,7 +4,7 @@
 # include <vector>
 
 # include "type.hh"
-# include "../../include/point.hh"
+# include "point.hh"
 
 struct Portal
 {

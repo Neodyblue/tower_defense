@@ -2,8 +2,8 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "map.hh"
-#include "gen.hh"
+#include "map/map.hh"
+#include "map/gen.hh"
 
 Map::Map(int width, int height, int iter)
 {

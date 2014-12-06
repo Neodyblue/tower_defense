@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <tuple>
 
-#include "gen.hh"
+#include "map/gen.hh"
 
   Gen::Gen(int width, int height)
 : width_(width), height_(height)
