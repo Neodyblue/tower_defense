@@ -12,3 +12,15 @@ MStats Mob::get_stats()
 {
   return stats_;
 }
+
+void Mob::set_stats(MStats stats)
+{
+  stats_ = stats;
+}
+
+Mob& Mob::operator+=(TAttack<Tower, Mob>& atk)
+{
+  stats_ += atk.get_diff();
+
+  return *this;
+}
