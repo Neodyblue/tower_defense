@@ -20,6 +20,7 @@ public:
         Point pos,
         tower_type type,
         tower_target_type target_type); /* FIXME add sprite */
+  virtual ~Tower();
 
   std::shared_ptr<Mob> get_target();
   void set_target(std::shared_ptr<Mob> mob);
@@ -30,7 +31,7 @@ public:
   tower_type& get_type();
   tower_target_type& get_target_type();
   std::shared_ptr<TAttack<Tower, Mob>> attack();
-  virtual void draw(sf::RenderWindow& window);
+  virtual void draw(sf::RenderWindow& window) override;
 
 private:
   int level_;

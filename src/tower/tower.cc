@@ -15,6 +15,9 @@ Tower::Tower(TStats base_stats,
   last_attack_ = clock_.getElapsedTime();
 }
 
+Tower::~Tower()
+{}
+
 std::shared_ptr<Mob> Tower::get_target()
 {
   return target_;
@@ -69,4 +72,12 @@ std::shared_ptr<TAttack<Tower, Mob>> Tower::attack()
           target_,
           MStats(-base_stats_.get_damages(), 0, 0),
           real_stats_.get_radius()));
+}
+
+void Tower::draw(sf::RenderWindow& window)
+{
+  sf::CircleShape octagon(5, 8);
+  octagon.setFillColor(sf::Color::Blue);
+  octagon.setPosition(pos_.get_x() + 5, pos_.get_y() + 5);
+  window.draw(octagon);
 }
