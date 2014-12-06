@@ -31,3 +31,8 @@ Point& Point::operator-(Point& other)
 
   return *this;
 }
+
+int Point::get_manhattan()
+{
+  return x_ + y_;
+}

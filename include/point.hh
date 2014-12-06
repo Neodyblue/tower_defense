@@ -11,6 +11,8 @@ public:
   Point& operator-=(Point& other);
   Point& operator-(Point& other);
 
+  int get_manhattan();
+
 private:
   int x_;
   int y_;
