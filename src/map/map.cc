@@ -1,5 +1,6 @@
 #include <ctime>
 #include <cstdlib>
+#include <iostream>
 
 #include "map.hh"
 #include "gen.hh"
@@ -45,29 +46,75 @@ Map::Map(int width, int height, int iter)
     }
 }
 
+
 void Map::draw(sf::RenderWindow& window)
 {
-    sf::RectangleShape rectangle(sf::Vector2f(1, 1));
+    sf::Uint8* buf = new sf::Uint8[width_ * height_ * 4];
     for (int x = 0; x < width_; x++)
         for (int y = 0; y < height_; y++)
         {
-            rectangle.setPosition(x * 1, y * 1);
-            if (map_[x][y] == Type::PROFONDSEA)
-                rectangle.setFillColor(sf::Color(0x32, 0x5d, 0xe0));
-            else if (map_[x][y] == Type::SEA)
-                rectangle.setFillColor(sf::Color(0x32, 0x5d, 0xe0));
-            else if (map_[x][y] == Type::BEACH)
-                rectangle.setFillColor(sf::Color(0xAd,0xd2, 0x47));
-            else if (map_[x][y] == Type::PLAIN)
-                rectangle.setFillColor(sf::Color(0x02, 0x7d, 0x01));
-            else if (map_[x][y] == Type::FOREST)
-                rectangle.setFillColor(sf::Color(0x00, 0x50, 0x00));
-            else if (map_[x][y] == Type::PROFONDFOREST)
-                rectangle.setFillColor(sf::Color(0x01, 0x3a, 0x03));
-            else if (map_[x][y] == Type::MOUNTAIN)
-                rectangle.setFillColor(sf::Color(0x6a, 0x38, 0x05));
-            else
-                rectangle.setFillColor(sf::Color(0x60, 0x2e, 0x00));
-            window.draw(rectangle);
+            sf::Uint8& r = buf[(x + y * width_) * 4];
+            sf::Uint8& g = buf[(x + y * width_) * 4 + 1];
+            sf::Uint8& b = buf[(x + y * width_) * 4 + 2];
+            get_color(map_[x][y], r, g, b);
+            buf[(x + y * width_) * 4 + 3] = 255;
         }
+    sf::Texture texture;
+    texture.create(width_, height_);
+    sprite_ = sf::Sprite(texture);
+    texture.update(buf);
+    window.draw(sprite_);
+    delete[] buf;
+}
+
+void Map::get_color(Type t, sf::Uint8& r, sf::Uint8& g, sf::Uint8& b)
+{
+    if (t == Type::PROFONDSEA)
+    {
+        r = 0x32;
+        g = 0x5d;
+        b = 0xe0;
+    }
+    else if (t == Type::SEA)
+    {
+        r = 0x32;
+        g = 0x5d;
+        b = 0xe0;
+    }
+    else if (t == Type::BEACH)
+    {
+        r = 0xad;
+        g = 0xd2;
+        b = 0x47;
+    }
+    else if (t == Type::PLAIN)
+    {
+        r = 0x02;
+        g = 0x7d;
+        b = 0x01;
+    }
+    else if (t == Type::FOREST)
+    {
+        r = 0x00;
+        g = 0x50;
+        b = 0x00;
+    }
+    else if (t == Type::PROFONDFOREST)
+    {
+        r = 0x01;
+        g = 0x3a;
+        b = 0x03;
+    }
+    else if (t == Type::MOUNTAIN)
+    {
+        r = 0x6a;
+        g = 0x38;
+        b = 0x05;
+    }
+    else
+    {
+        r = 0x60;
+        g = 0x2e;
+        b = 0x00;
+    }
 }
