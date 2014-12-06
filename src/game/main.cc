@@ -1,5 +1,6 @@
 #include "game/button.hh"
 #include "game/menu.hh"
+#include "play/play.hh"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <map>
@@ -10,7 +11,7 @@ int main()
 
   sf::Font font;
 
-  if (!font.loadFromFile("../../res/Livingst.ttf"))
+  if (!font.loadFromFile("./res/Livingst.ttf"))
     return 1;
 
 /*  sf::RectangleShape button(sf::Vector2f(100, 50));
@@ -20,11 +21,11 @@ int main()
   quit_text.setColor(sf::Color::Black);*/
 
   sf::Texture bg_image;
-  if (!bg_image.loadFromFile("../../res/n_background_menu.jpg"))
+  if (!bg_image.loadFromFile("./res/n_background_menu.jpg"))
       return 1;
 
   sf::Texture play_image;
-  if (!play_image.loadFromFile("../../res/troll.jpg"))
+  if (!play_image.loadFromFile("./res/n_background_menu.jpg"))
     return 1;
 
 //  Button but(QUIT, sf::Vector2f(400, 300), button, quit_text);
@@ -45,11 +46,13 @@ int main()
   menu = menus["begin"];
 // menu.add_button(but);
   menu->init_buttons(font, window.getSize());
+  Play p{};
+
 
   while (window.isOpen())
   {
 
-    sf::Vector2f temp =  sf::Vector2f::Vector2(sf::Mouse::getPosition(window));
+    sf::Vector2f temp = sf::Vector2f::Vector2(sf::Mouse::getPosition(window));
 
     enum action act = menu->get_action(temp);
 
@@ -62,12 +65,15 @@ int main()
       }
       if (act == PLAY)
       {
-        menu = menus["play"];
+        p.update();
       }
     }
 
     window.clear();
-    menu->draw(window);
+    if (act == PLAY)
+      p.draw(window);
+    else
+      menu->draw(window);
     window.display();
 
 
