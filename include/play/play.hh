@@ -19,6 +19,7 @@ class Play
     Map map_;
     std::vector<std::shared_ptr<Mob>> mobs_;
     std::vector<Point> portals_;
+    std::vector<Tower> towers_;
     Point nexus_;
 
     int counter = 0;
