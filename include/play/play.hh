@@ -15,14 +15,17 @@ class Play
     Play();
     void update();
     void draw(sf::RenderWindow& window);
+
   private:
+    void generate_mob();
+    void move_mobs();
     Map map_;
     std::vector<std::shared_ptr<Mob>> mobs_;
     std::vector<Point> portals_;
     std::vector<Tower> towers_;
     Point nexus_;
 
-    int counter = 0;
+    int counter_;
 };
 
 #endif /* !PLAY_HH */
