@@ -7,7 +7,7 @@ template<class T, class M>
 TAttack<T, M>::TAttack(T origin, M target, MStats diff, int zone)
   : origin_(origin)
   , target_(target)
-  , diff(diff)
+  , diff_(diff)
   , zone_(zone)
 {}
 
