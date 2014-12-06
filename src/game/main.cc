@@ -2,6 +2,7 @@
 #include "game/menu.hh"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <map>
 
 int main()
 {
@@ -22,18 +23,35 @@ int main()
   if (!bg_image.loadFromFile("../../res/n_background_menu.jpg"))
       return 1;
 
+  sf::Texture play_image;
+  if (!play_image.loadFromFile("../../res/troll.jpg"))
+    return 1;
+
 //  Button but(QUIT, sf::Vector2f(400, 300), button, quit_text);
 
-  Menu menu(bg_image, BEGINM);
+  std::map<std::string, std::shared_ptr<Menu>> menus;
+
+  std::shared_ptr<Menu> menu = std::make_shared<Menu>(bg_image, BEGINM);
+  std::pair<std::string, std::shared_ptr<Menu>> temp("begin", menu);
+
+  menus.insert(temp);
+
+  menu = std::make_shared<Menu>(play_image, GAMEM);
+  menu->init_buttons(font, window.getSize());
+
+  temp = std::pair<std::string, std::shared_ptr<Menu>>("play", menu);
+  menus.insert(temp);
+
+  menu = menus["begin"];
 // menu.add_button(but);
-  menu.init_buttons(font, window.getSize());
+  menu->init_buttons(font, window.getSize());
 
   while (window.isOpen())
   {
 
     sf::Vector2f temp =  sf::Vector2f::Vector2(sf::Mouse::getPosition(window));
 
-    enum action act = menu.get_action(temp);
+    enum action act = menu->get_action(temp);
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
@@ -42,10 +60,14 @@ int main()
         window.clear();
         window.close();
       }
+      if (act == PLAY)
+      {
+        menu = menus["play"];
+      }
     }
 
     window.clear();
-    menu.draw(window);
+    menu->draw(window);
     window.display();
 
 
