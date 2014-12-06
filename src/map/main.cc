@@ -6,8 +6,8 @@
 int main()
 {
   auto v = Map(5, 5, 7);
-  unsigned width = v.get_width();
-  unsigned height = v.get_height();
+  unsigned width = v.get_width_pixel();
+  unsigned height = v.get_height_pixel();
 
   std::cout << "Finis" << std::endl;
 

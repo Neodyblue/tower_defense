@@ -11,6 +11,7 @@ enum class Type
   PROFONDFOREST = 0x21,
   MOUNTAIN = 0x30,
   HIGHMOUNTAIN = 0x31,
+  NONE = 0xFF,
 };
 
 #endif
