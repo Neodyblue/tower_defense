@@ -3,7 +3,10 @@
 
 enum tower_type
 {
-  HUMAN
+  HUMAN,
+  WOOD,
+  MOUNTAIN,
+  WATER
 };
 
 #endif /* end of include guard: TOWER_TYPE_HH */

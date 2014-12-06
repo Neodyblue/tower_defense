@@ -12,6 +12,8 @@
 # include "type.hh"
 # include "portal.hh"
 # include "point.hh"
+# include "tower/tower.hh"
+# include "tower/tower_type.hh"
 
 class Map
 {
@@ -29,6 +31,11 @@ class Map
     int get_height_case() const;
 
     Type get_case(int x, int y) const;
+
+    bool can_build(Point& p, tower_type t);
+    Point get_build_position(Point& p);
+    Point and_get();
+
   private:
     void gen_case_map_();
     void gen_path_();

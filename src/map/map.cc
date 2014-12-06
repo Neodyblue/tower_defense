@@ -194,7 +194,9 @@ void Map::draw(sf::RenderWindow& window)
 
   /*Draw Nexus*/
   sf::RectangleShape rectangle(sf::Vector2f(CASE_SIZE, CASE_SIZE));
-  rectangle.setFillColor(sf::Color::Red);
+  sf::Color c = sf::Color::Black;
+  c.a = 100;
+  rectangle.setFillColor(c);
   /*Draw path*/
   for (unsigned i = 0; i < portals.size(); i++)
     for (unsigned j = 0; j < portals[i].path.size(); j++)
@@ -239,6 +241,33 @@ int Map::get_height_pixel() const
   return height_;
 }
 
+bool Map::can_build(Point& p, tower_type t)
+{
+  Type type = get_case(p.get_x() / CASE_SIZE, p.get_y() / CASE_SIZE);
+  if (t == HUMAN)
+    return 0 != (type & Type::BEACH);
+  if (t == MOUNTAIN)
+    return 0 != (type & Type::MOUNTAIN);
+  if (t == WATER)
+    return 0 != (type & Type::SEA);
+  if (t == WOOD)
+    return 0 != (type & Type::FOREST);
+  else
+    return 0;
+}
+
+Point Map::get_build_position(Point& p)
+{
+  case_[p.get_x() / CASE_SIZE][p.get_y() / CASE_SIZE] = Type::TOWER;
+  return Point(p.get_x() - (p.get_x() % CASE_SIZE) + CASE_SIZE / 2,
+               p.get_y() - (p.get_y() % CASE_SIZE) + CASE_SIZE / 2);
+}
+
+Point Map::and_get()
+{
+  return Point(nexus_.get_x() * CASE_SIZE + CASE_SIZE / 2,
+               nexus_.get_y() * CASE_SIZE + CASE_SIZE / 2);
+}
 void Map::get_color(Type t, sf::Uint8& r, sf::Uint8& g, sf::Uint8& b)
 {
   if (t == Type::PROFONDSEA)
