@@ -269,19 +269,35 @@ Point Map::and_get()
                nexus_.get_y() * CASE_SIZE + CASE_SIZE / 2);
 }
 
-Point Map::get_next(Point& p)
+Point Map::get_next(Point p)
 {
   Point current(p.get_x() / CASE_SIZE, p.get_y() / CASE_SIZE);
-  Point next;
+  Point next(0, 0);
   for (unsigned i = 0; i < portals_.size(); i++)
-    for (unsigned j = 0; j < portals_[i].path.size(); i++)
-      if (portals_[i].path[j] == current && j > 0)
+    for (unsigned j = 0; j < portals_[i].path.size(); j++)
+      if (portals_[i].path[j] == current)
       {
-        next = portals_[i].path[j - 1];
+        if (j == 0)
+          next = portals_[i].path[j];
+        else
+          next = portals_[i].path[j - 1];
         break;
       }
   return Point(next.get_x() * CASE_SIZE + CASE_SIZE / 2,
                next.get_y() * CASE_SIZE + CASE_SIZE / 2);
+}
+
+std::vector<Point> Map::get_portals()
+{
+  std::vector<Point> res;
+  for (unsigned i = 0; i < portals_.size(); i++)
+  {
+    Point p = portals_[i].path[portals_[i].path.size() - 1];
+    p.set_x(p.get_x() * CASE_SIZE + CASE_SIZE / 2);
+    p.set_y(p.get_y() * CASE_SIZE + CASE_SIZE / 2);
+    res.push_back(p);
+  }
+  return res;
 }
 
 void Map::get_color(Type t, sf::Uint8& r, sf::Uint8& g, sf::Uint8& b)

@@ -35,8 +35,9 @@ class Map
     bool can_build(Point& p, tower_type t);
     Point get_build_position(Point& p);
     Point and_get();
-    Point get_next(Point& p);
+    Point get_next(Point p);
 
+    std::vector<Point> get_portals();
   private:
     void gen_case_map_();
     void gen_path_();

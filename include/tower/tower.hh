@@ -30,6 +30,7 @@ public:
   tower_type& get_type();
   tower_target_type& get_target_type();
   std::shared_ptr<TAttack<Tower, Mob>> attack();
+  virtual void draw(sf::RenderWindow& window);
 
 private:
   int level_;

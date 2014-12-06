@@ -1,6 +1,8 @@
 #ifndef ENTITY_HH
 # define ENTITY_HH
 
+# include <SFML/Graphics.hpp>
+
 # include "point.hh"
 
 class Entity
@@ -9,9 +11,9 @@ public:
   Entity(Point pos); /* FIXME add sprite */
   virtual ~Entity();
 
-  Point& get_pos();
+  Point get_pos();
   void set_pos(Point pos);
-  virtual void draw(/*FIXME param SFML */);
+  virtual void draw(sf::RenderWindow& window);
 
 protected:
   Point pos_;

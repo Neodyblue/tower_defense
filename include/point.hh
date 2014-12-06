@@ -7,7 +7,6 @@ public:
   Point(int x = 0, int y = 0);
 
   Point& operator+=(Point& other);
-  bool operator==(Point& other);
   Point& operator+(Point& other);
   Point& operator-=(Point& other);
   Point& operator-(Point& other);
@@ -22,11 +21,24 @@ public:
     return y_;
   }
 
+  void set_x(int x)
+  {
+    x_ = x;
+  }
+
+  void set_y(int y)
+  {
+    y_ = y;
+  }
+
   int get_manhattan();
 
 private:
   int x_;
   int y_;
 };
+
+bool operator==(Point p1, Point p2);
+bool operator!=(Point p1, Point p2);
 
 #endif /* end of include guard: POINT_HH */
