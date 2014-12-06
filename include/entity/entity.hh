@@ -9,6 +9,7 @@ public:
   Entity(Point pos); /* FIXME add sprite */
   virtual ~Entity();
 
+  Point& get_pos();
   virtual void draw(/*FIXME param SFML */);
 
 private:

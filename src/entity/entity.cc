@@ -8,5 +8,10 @@ Entity::Entity(Point pos) /* FIXME add sprite */
 Entity::~Entity()
 {}
 
+Point& Entity::get_pos()
+{
+  return pos_;
+}
+
 void Entity::draw() /* FIXME param SFML */
 {}
