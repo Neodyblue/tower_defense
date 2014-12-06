@@ -1,11 +1,13 @@
-OBJS=./src/main2.o \
+OBJS=./src/main.o \
 	./src/point.o \
 	./src/mob/mob_stats.o \
 	./src/mob/mob.o \
 	./src/entity/entity.o \
 	./src/map/gen.o \
 	./src/map/map.o \
-	./src/play/play.o
+	./src/play/play.o \
+	./src/tower/tower.o \
+	./src/tower/tower_stats.o
 
 CXX=clang++
 CXXFLAGS=-Wall -Werror -Wextra -pedantic -std=c++1y -I include -g3
