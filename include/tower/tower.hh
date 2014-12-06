@@ -2,7 +2,7 @@
 # define TOWER_HH
 
 # include <memory>
-# include <SFML/Clock.hpp>
+# include <SFML/System.hpp>
 
 # include "mob/mob.hh"
 # include "tower/tower_stats.hh"
@@ -19,15 +19,15 @@ public:
         tower_type type,
         tower_target_type target_type); /* FIXME add sprite */
 
-  std::shared_ptr<Mob> get_target() const;
+  std::shared_ptr<Mob> get_target() ;
   void set_target(std::shared_ptr<Mob> mob);
-  bool is_target_reachable() const;
-  const TStats& get_base_stats() const;
-  const TStats& get_real_stats() const;
-  const int get_level() const;
-  const tower_type& get_type() const;
-  const tower_target_type& get_target_type() const;
-  std::shared_ptr<Attack<Tower, Mob>> attack();
+  bool is_target_reachable();
+  TStats& get_base_stats() ;
+  TStats& get_real_stats() ;
+  int get_level() ;
+  tower_type& get_type() ;
+  tower_target_type& get_target_type() ;
+  std::shared_ptr<TAttack<Tower, Mob>> attack();
 
 private:
   int level_;
