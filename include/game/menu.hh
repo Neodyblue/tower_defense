@@ -19,7 +19,7 @@ class Menu
 {
 public:
   Menu() = default;
-  Menu(sf::Texture sprite, enum menu_type type);
+  Menu(sf::Texture& sprite, enum menu_type type);
   void add_button(Button but);
   enum action get_action(sf::Vector2f temp);
   void draw(sf::RenderWindow& window) const;
