@@ -1,5 +1,6 @@
-#include "point.hh"
+#include <cmath>
 
+#include "point.hh"
 
 Point::Point(int x, int y)
   : x_(x)
@@ -34,5 +35,5 @@ Point& Point::operator-(Point& other)
 
 int Point::get_manhattan()
 {
-  return x_ + y_;
+  return std::abs(x_) + std::abs(y_);
 }
