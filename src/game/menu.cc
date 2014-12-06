@@ -7,7 +7,7 @@
 #include "game/button.hh"
 #include "game/action_types.hh"
 
-Menu::Menu(sf::Texture sprite, enum menu_type type) : texture_(sprite),
+Menu::Menu(sf::Texture& sprite, enum menu_type type) : texture_(sprite),
                                                       bg_img_(texture_),
                                                       type_(type)
 {
