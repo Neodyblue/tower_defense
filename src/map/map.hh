@@ -5,10 +5,12 @@
 
 # include <SFML/Graphics.hpp>
 
+# include <tuple>
 # include <vector>
 # include <memory>
 
 # include "type.hh"
+# include "../../include/point.hh"
 
 class Map
 {
@@ -27,14 +29,18 @@ class Map
 
     Type get_case(int x, int y) const;
   private:
+    void gen_case_map_();
+    void gen_path_();
+
     void gen_sprite_();
     void gen_case_sprite_();
-    void gen_case_map_();
+    void gen_case_spec();
 
     std::vector<std::vector<Type>> map_;
     std::vector<std::vector<Type>> case_;
     sf::Uint8* buf_;
 
+    Point p;
     int width_;
     int height_;
 };

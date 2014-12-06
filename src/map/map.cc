@@ -46,12 +46,36 @@ Map::Map(int width, int height, int iter)
   }
   buf_ = nullptr;
   gen_case_map_();
+  gen_path_();
   gen_sprite_();
 }
 
 Map::~Map()
 {
   delete[] buf_;
+}
+
+void Map::gen_case_map_()
+{
+  case_.resize(get_width_case());
+  for (int x = 0; x < get_width_case(); x++)
+  {
+    case_[x].resize(get_height_case());
+    for (int y = 0; y < get_height_case(); y++)
+    {
+      case_[x][y] =
+        map_[x * CASE_SIZE + CASE_SIZE / 2][y * CASE_SIZE + CASE_SIZE / 2];
+    }
+  }
+}
+
+void Map::gen_path_()
+{
+  int x = get_width_case() / 2;
+  int y = get_height_case() / 2;
+  x += rand() % 20 - 10;
+  y += rand() % 20 - 10;
+  p = Point(x, y);
 }
 
 void Map::gen_case_sprite_()
@@ -98,19 +122,6 @@ void Map::gen_sprite_()
     }
 }
 
-void Map::gen_case_map_()
-{
-  case_.resize(get_width_case());
-  for (int x = 0; x < get_width_case(); x++)
-  {
-    case_[x].resize(get_height_case());
-    for (int y = 0; y < get_height_case(); y++)
-    {
-      case_[x][y] =
-        map_[x * CASE_SIZE + CASE_SIZE / 2][y * CASE_SIZE + CASE_SIZE / 2];
-    }
-  }
-}
 
 void Map::draw(sf::RenderWindow& window)
 {
@@ -119,6 +130,12 @@ void Map::draw(sf::RenderWindow& window)
   sf::Sprite sprite_ = sf::Sprite(texture);
   texture.update(buf_);
   window.draw(sprite_);
+  sf::RectangleShape rectangle(sf::Vector2f(CASE_SIZE, CASE_SIZE));
+  rectangle.setPosition(CASE_SIZE * p.get_x(), CASE_SIZE * p.get_y());
+  rectangle.setFillColor(sf::Color::White);
+  rectangle.setOutlineThickness(-1);
+  rectangle.setOutlineColor(sf::Color(200, 200, 200));
+  window.draw(rectangle);
 }
 
 Type Map::get_case(int x, int y) const
