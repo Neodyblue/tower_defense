@@ -7,6 +7,7 @@
  */
 enum action
 {
+  NIL,
   PLAY,
   PAUSE,
   QUIT,
