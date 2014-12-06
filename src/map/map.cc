@@ -275,9 +275,9 @@ Point Map::get_next(Point& p)
   Point next;
   for (unsigned i = 0; i < portals_.size(); i++)
     for (unsigned j = 0; j < portals_[i].path.size(); i++)
-      if (portals_[i].path[j] == current)
+      if (portals_[i].path[j] == current && j > 0)
       {
-        next = portals_[i].path[j];
+        next = portals_[i].path[j - 1];
         break;
       }
   return Point(next.get_x() * CASE_SIZE + CASE_SIZE / 2,
