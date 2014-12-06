@@ -12,7 +12,7 @@ public:
   Point& get_pos();
   virtual void draw(/*FIXME param SFML */);
 
-private:
+protected:
   Point pos_;
   /* FIXME type */ int sprite_;
 };
