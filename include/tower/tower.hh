@@ -32,6 +32,12 @@ public:
   tower_target_type& get_target_type();
   std::shared_ptr<TAttack<Tower, Mob>> attack();
   virtual void draw(sf::RenderWindow& window) override;
+  virtual void draw_beam(sf::RenderWindow& window);
+
+  static std::shared_ptr<Tower> get_evles(Point pos);
+  static std::shared_ptr<Tower> get_dwarfes(Point pos);
+  static std::shared_ptr<Tower> get_nagas(Point pos);
+  static std::shared_ptr<Tower> get_humans(Point pos);
 
 private:
   int level_;

@@ -9,6 +9,7 @@ Play::Play()
   : map_(10, 5, 7)
   , counter_(0)
 {
+  gold_ = 1000;
   portals_ = map_.get_portals();
   nexus_ = map_.and_get();
 }
@@ -40,17 +41,38 @@ void Play::input(sf::RenderWindow& window)
   {
     sf::Vector2i v = sf::Mouse::getPosition(window);
     Point p(v.x, v.y);
-    tower_type t = HUMAN;
-    if (map_.can_build(p, t))
+    tower_type t;
+    if (selected_tower_ == 1)
+      t = WATER;
+    else if (selected_tower_ == 2)
+      t = HUMAN;
+    else if (selected_tower_ == 3)
+      t = MOUNTAIN;
+    else if (selected_tower_ == 4)
+      t = WOOD;
+    else
+      return;
+    if (map_.can_build(p, t) && gold_ >= 20)
     {
-      p = map_.get_build_position(p);
-      towers_.push_back(std::make_shared<Tower>(TStats(1, 80, 1, 1000),
-            p,
-            HUMAN,
-            GROUND));
+      gold_ -= 20;
+      add_tower_(p, t);
     }
   }
 }
+
+void Play::add_tower_(Point p, tower_type t)
+{
+  p = map_.get_build_position(p);
+  if (t == HUMAN)
+    towers_.push_back(Tower::get_humans(p));
+  else if (t == WOOD)
+    towers_.push_back(Tower::get_evles(p));
+  else if (t == MOUNTAIN)
+    towers_.push_back(Tower::get_dwarfes(p));
+  else
+    towers_.push_back(Tower::get_nagas(p));
+}
+
 void Play::generate_mob()
 {
   if (counter_ % 10 == 0)
@@ -127,13 +149,13 @@ void Play::remove_deads()
 
   for (unsigned int i = 0; i < mobs_.size(); i++)
     if (mobs_[i]->get_stats().get_health() <= 0)
+    {
+      gold_ += mobs_[i]->get_stats().get_gold();
       mobs_to_remove.push_back(i);
+    }
 
   for (int i : mobs_to_remove)
-  {
-    gold_ += mobs_[i]->get_stats().get_gold();
     mobs_.erase(mobs_.begin() + i);
-  }
 }
 
 void Play::update()
@@ -155,20 +177,13 @@ void Play::draw(sf::RenderWindow& window, sf::Font& f)
   for (auto tower : towers_)
     tower->draw(window);
 
+  for (auto tower : towers_)
+    tower->draw_beam(window);
+
   std::stringstream ss;
   ss << gold_;
   sf::Text gold(ss.str(), f, 42);
   gold.setPosition(0, 640);
-  gold.setColor(sf::Color::Yellow);
+  gold.setColor(sf::Color::Black);
   window.draw(gold);
-}
-
-long long unsigned Play::get_gold()
-{
-  return gold_;
-}
-
-std::shared_ptr<Tower> Play::get_select()
-{
-  return selected_;
 }

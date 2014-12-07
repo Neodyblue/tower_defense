@@ -247,13 +247,13 @@ bool Map::can_build(Point& p, tower_type t)
   if (type >= Type::NONE)
     return 0;
   if (t == HUMAN)
-    return 0 != (type & Type::BEACH);
+    return (type == Type::BEACH || type == Type::PLAIN);
   if (t == MOUNTAIN)
-    return 0 != (type & Type::MOUNTAIN);
+    return (type == Type::MOUNTAIN|| type == Type::HIGHMOUNTAIN);
   if (t == WATER)
-    return 0 != (type & Type::SEA);
+    return (type == Type::SEA || type == Type::PROFONDSEA);
   if (t == WOOD)
-    return 0 != (type & Type::FOREST);
+    return (type == Type::FOREST || type == Type::PROFONDFOREST);
   else
     return 0;
 }

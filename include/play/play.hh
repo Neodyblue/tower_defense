@@ -16,10 +16,7 @@ class Play
     Play();
     void update();
     void input(sf::RenderWindow& window);
-  void draw(sf::RenderWindow& window, sf::Font& f);
-
-    long long unsigned get_gold();
-    std::shared_ptr<Tower> get_select();
+    void draw(sf::RenderWindow& window, sf::Font& f);
 
   private:
     void generate_mob();
@@ -27,7 +24,7 @@ class Play
     void set_targets();
     void attack();
     void remove_deads();
-    void add_tower_(Point p);
+    void add_tower_(Point p, tower_type t);
 
     Map map_;
     std::vector<std::shared_ptr<Mob>> mobs_;
@@ -37,7 +34,6 @@ class Play
     int selected_tower_ = 0;
 
     long long unsigned gold_ = 100;
-    std::shared_ptr<Tower> selected_;
     int counter_;
 };
 

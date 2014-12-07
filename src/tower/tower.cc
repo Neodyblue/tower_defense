@@ -89,11 +89,21 @@ std::shared_ptr<TAttack<Tower, Mob>> Tower::attack()
 
 void Tower::draw(sf::RenderWindow& window)
 {
-  sf::CircleShape octagon(5, 8);
-  octagon.setFillColor(sf::Color::Blue);
+  sf::CircleShape octagon(5);
+  if (type_ == WATER)
+    octagon.setFillColor(sf::Color::Blue);
+  else if (type_ == HUMAN)
+    octagon.setFillColor(sf::Color::White);
+  else if (type_ == WOOD)
+    octagon.setFillColor(sf::Color::Green);
+  else
+    octagon.setFillColor(sf::Color::Red);
   octagon.setPosition(pos_.get_x() + 5, pos_.get_y() + 5);
   window.draw(octagon);
+}
 
+void Tower::draw_beam(sf::RenderWindow& window)
+{
   if (!target_ || target_->get_stats().get_health() <= 0)
     return;
 
@@ -108,4 +118,27 @@ void Tower::draw(sf::RenderWindow& window)
     l.color = sf::Color::Red;
 
   window.draw(line, 2, sf::Lines);
+}
+
+std::shared_ptr<Tower> Tower::get_evles(Point pos)
+{
+  return std::make_shared<Tower>(TStats(2, 200, 1, 2000), pos, WOOD, GROUND);
+}
+
+std::shared_ptr<Tower> Tower::get_dwarfes(Point pos)
+{
+  return std::make_shared<Tower>(TStats(4, 40, 1, 1000), pos,
+                                 MOUNTAIN, GROUND);
+}
+
+std::shared_ptr<Tower> Tower::get_nagas(Point pos)
+{
+  return std::make_shared<Tower>(TStats(1, 100, 1, 500), pos,
+                                 WATER, GROUND);
+}
+
+std::shared_ptr<Tower> Tower::get_humans(Point pos)
+{
+  return std::make_shared<Tower>(TStats(2, 100, 1, 1000), pos,
+                                 HUMAN, GROUND);
 }
