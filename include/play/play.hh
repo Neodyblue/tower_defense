@@ -16,7 +16,7 @@ class Play
     Play();
     void update();
     void input(sf::RenderWindow& window);
-    void draw(sf::RenderWindow& window);
+  void draw(sf::RenderWindow& window, sf::Font& f);
 
     long long unsigned get_gold();
     std::shared_ptr<Tower> get_select();
