@@ -113,7 +113,6 @@ void Tower::draw(sf::RenderWindow& window)
 
 void Tower::draw_beam(sf::RenderWindow& window)
 {
-
   if (!target_ || target_->get_stats().get_health() <= 0)
     return;
 
