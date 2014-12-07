@@ -1,6 +1,5 @@
 #include <ctime>
 #include <cstdlib>
-#include <fstream>
 #include <tuple>
 
 #include "map/gen.hh"
@@ -25,14 +24,6 @@ void Gen::init_()
 
 void Gen::load_map_()
 {
-  std::ifstream file("map");
-  if (file)
-  {
-    unsigned int seed = 0;
-    file >> seed;
-    srand(seed);
-    file.close();
-  }
   init_();
 }
 

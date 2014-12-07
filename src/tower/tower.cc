@@ -91,21 +91,21 @@ void Tower::draw(sf::RenderWindow& window)
 {
   sf::CircleShape octagon(5);
   if (type_ == WATER)
-    octagon.setFillColor(sf::Color::Blue);
+    octagon.setFillColor(sf::Color(0x9d, 0xae, 0xb3));
   else if (type_ == HUMAN)
-    octagon.setFillColor(sf::Color::White);
+    octagon.setFillColor(sf::Color(0xcc, 0xc0, 0x80));
   else if (type_ == WOOD)
-    octagon.setFillColor(sf::Color::Green);
+    octagon.setFillColor(sf::Color(0x66, 0x8d, 0x5d));
   else if (type_ == MOUNTAIN)
-    octagon.setFillColor(sf::Color::Red);
+    octagon.setFillColor(sf::Color(0xa0, 0x38, 0x43));
   else if (type_ == SUPER_WATER)
-    octagon.setFillColor(sf::Color::Cyan);
+    octagon.setFillColor(sf::Color(0x7e, 0x90, 0x95));
   else if (type_ == SUPER_HUMAN)
-    octagon.setFillColor(sf::Color::Magenta);
+    octagon.setFillColor(sf::Color(0xb0, 0x8d, 0x58));
   else if (type_ == SUPER_WOOD)
-    octagon.setFillColor(sf::Color::Yellow);
+    octagon.setFillColor(sf::Color(0x64, 0x6c, 0x4d));
   else
-    octagon.setFillColor(sf::Color::Color(255, 140, 0));
+    octagon.setFillColor(sf::Color(0x6f, 0x2e, 0x3f));
 
   octagon.setPosition(pos_.get_x() + 5, pos_.get_y() + 5);
   window.draw(octagon);
@@ -126,22 +126,22 @@ void Tower::draw_beam(sf::RenderWindow& window)
 
   for (auto& l : line)
   {
-    if (type_ == HUMAN)
-      l.color = sf::Color::Red;
-    if (type_ == WOOD)
-      l.color = sf::Color::Green;
-    if (type_ == WATER)
-      l.color = sf::Color::Blue;
-    if (type_ == MOUNTAIN)
-      l.color = sf::Color::Black;
-    if (type_ == SUPER_HUMAN)
-      l.color = sf::Color::Magenta;
-    if (type_ == SUPER_WOOD)
-      l.color = sf::Color::Cyan;
-    if (type_ == SUPER_WATER)
-      l.color = sf::Color::Color(255, 140, 0);
-    if (type_ == SUPER_MOUNTAIN)
-      l.color = sf::Color::Yellow;
+  if (type_ == WATER)
+    l.color = sf::Color(0x9d, 0xae, 0xb3);
+  else if (type_ == HUMAN)
+    l.color = sf::Color(0xcc, 0xc0, 0x80);
+  else if (type_ == WOOD)
+    l.color = sf::Color(0x66, 0x8d, 0x5d);
+  else if (type_ == MOUNTAIN)
+    l.color = sf::Color(0xa0, 0x38, 0x43);
+  else if (type_ == SUPER_WATER)
+    l.color = sf::Color(0x7e, 0x90, 0x95);
+  else if (type_ == SUPER_HUMAN)
+    l.color = sf::Color(0xb0, 0x8d, 0x58);
+  else if (type_ == SUPER_WOOD)
+    l.color = sf::Color(0x64, 0x6c, 0x4d);
+  else
+    l.color = sf::Color(0x6f, 0x2e, 0x3f);
   }
 
   window.draw(line, 2, sf::Lines);

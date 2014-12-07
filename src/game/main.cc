@@ -30,7 +30,11 @@ int main()
   bool pause = true;
   std::shared_ptr<Menu> menu;
 
-  sf::RenderWindow window(sf::VideoMode(1280, 1024), "Best Game");
+
+  sf::ContextSettings settings;
+  settings.antialiasingLevel = 8;
+  sf::RenderWindow window(sf::VideoMode(1280, 1024), "Best Game",
+                          sf::Style::Default, settings);
 
   sf::Font font;
 
