@@ -1,6 +1,6 @@
-# include <memory>
-# include <vector>
-# include <SFML/Graphics.hpp>
+#include <memory>
+#include <vector>
+#include <SFML/Graphics.hpp>
 #include "game/create_buttons.hh"
 #include "game/menu_types.hh"
 #include "game/menu.hh"
@@ -52,8 +52,6 @@ void Menu::init_buttons(sf::Font& f, sf::Vector2u win_size)
     buttons_ = add_begin_buttons(f, win_size);
   else if (type_ == GAMEM)
     buttons_ = add_game_buttons(f, win_size);
-  else if (type_ == PAUSEM)
-    buttons_ = add_pause_buttons(f, win_size);
   else
     buttons_ = add_over_buttons(f, win_size);
 }
