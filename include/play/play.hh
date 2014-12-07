@@ -8,6 +8,7 @@
 
 # include "map/map.hh"
 # include "mob/mob.hh"
+# include "tower/tower.hh"
 
 class Play
 {
@@ -19,8 +20,12 @@ class Play
   private:
     void generate_mob();
     void move_mobs();
+    void set_targets();
+    void attack();
+    void remove_deads();
     Map map_;
     std::vector<std::shared_ptr<Mob>> mobs_;
+    std::vector<std::shared_ptr<Tower>> towers_;
     std::vector<Point> portals_;
     std::vector<Tower> towers_;
     Point nexus_;
