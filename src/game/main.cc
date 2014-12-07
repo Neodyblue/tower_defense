@@ -47,7 +47,6 @@ int main()
   if (!play_image.loadFromFile("./res/play.jpeg"))
     return 1;
 
-//  Button but(QUIT, sf::Vector2f(400, 300), button, quit_text);
 
   std::map<std::string, std::shared_ptr<Menu>> menus;
 
@@ -55,7 +54,6 @@ int main()
   menus.insert(init_menus(play_image, GAMEM, font, window.getSize()));
 
   menu = menus["begin"];
-// menu.add_button(but);
 
   menu->draw(window);
   window.display();
@@ -73,15 +71,13 @@ int main()
         && (clock.getElapsedTime() - time).asMilliseconds() >= 200.0f)
     {
       time = clock.getElapsedTime();
+
       if (act == QUIT)
-      {
-        window.clear();
         window.close();
-      }
+
       if (act == PLAY)
-      {
         menu = menus["play"];
-      }
+
       if (act == QUITMENU)
         menu = menus["begin"];
       if (act == PAUSE)
