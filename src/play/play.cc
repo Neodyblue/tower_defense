@@ -52,10 +52,10 @@ void Play::input(sf::RenderWindow& window)
 }
 void Play::generate_mob()
 {
-  if (counter_ % 60 == 0)
+  if (counter_ % 10 == 0)
   {
     Point p = portals_[rand() % portals_.size()];
-    mobs_.push_back(std::make_shared<Mob>(p, MStats(1, 1, false)));
+    mobs_.push_back(std::make_shared<Mob>(p, MStats(1, 2, false)));
     mobs_[mobs_.size() - 1]->set_dir(p);
   }
 
