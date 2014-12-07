@@ -95,7 +95,7 @@ void Play::generate_mob()
   if (counter_ % 10 == 0)
   {
     Point p = portals_[rand() % portals_.size()];
-    mobs_.push_back(std::make_shared<Mob>(p, MStats(10, 2, false)));
+    mobs_.push_back(std::make_shared<Mob>(p, MStats(1, 10, 2, false)));
     mobs_[mobs_.size() - 1]->set_dir(p);
   }
 
@@ -115,7 +115,9 @@ void Play::move_mobs()
       else
       {
         mobs_to_remove.push_back(i);
-        mobs_[i]->set_stats(MStats(0, 0, false));
+        //TODO decr nexus
+        mobs_[i]->set_stats(MStats(mobs_[i]->get_stats().get_strength(),
+                                   0, 0, false));
       }
     }
   }

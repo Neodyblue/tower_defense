@@ -1,7 +1,8 @@
 #include "mob/mob_stats.hh"
 
-MStats::MStats(int health, int speed, bool fly)
+MStats::MStats(int str, int health, int speed, bool fly)
   : health_(health)
+  , strength_(str)
   , speed_(speed)
   , fly_(fly)
 {
@@ -32,6 +33,11 @@ MStats& MStats::operator-(MStats& other)
   speed_ -= other.speed_;
 
   return *this;
+}
+
+int MStats::get_strength() const
+{
+  return strength_;
 }
 
 int MStats::get_health() const

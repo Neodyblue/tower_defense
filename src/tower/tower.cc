@@ -83,7 +83,7 @@ std::shared_ptr<TAttack<Tower, Mob>> Tower::attack()
   return (std::make_shared<TAttack<Tower, Mob>>(
           *this,
           target_,
-          MStats(-base_stats_.get_damages(), 0, 0),
+          MStats(0, -base_stats_.get_damages(), 0, 0),
           real_stats_.get_radius()));
 }
 
