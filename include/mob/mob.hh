@@ -26,6 +26,7 @@ public:
 
 private:
   MStats stats_;
+  MStats real_stats_;
   Point dir_;
 };
 
