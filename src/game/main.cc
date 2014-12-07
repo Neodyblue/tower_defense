@@ -5,20 +5,34 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 
+std::pair<std::string, std::shared_ptr<Menu>> init_menus(sf::Texture& bg_img,
+                                                         enum menu_type type,
+                                                         sf::Font& f,
+                                                         sf::Vector2u v)
+{
+  std::shared_ptr<Menu> menu = std::make_shared<Menu>(bg_img, type);
+
+  menu->init_buttons(f, v);
+
+  if (type == BEGINM)
+    return std::pair<std::string, std::shared_ptr<Menu>>("begin", menu);
+
+  if (type == GAMEM)
+    return std::pair<std::string, std::shared_ptr<Menu>>("play", menu);
+
+  return std::pair<std::string, std::shared_ptr<Menu>>("troll", menu);
+}
+
 int main()
 {
+  std::shared_ptr<Menu> menu;
+
   sf::RenderWindow window(sf::VideoMode(1280, 1024), "Best Game");
 
   sf::Font font;
 
   if (!font.loadFromFile("./res/Livingst.ttf"))
     return 1;
-
-/*  sf::RectangleShape button(sf::Vector2f(100, 50));
-  button.setFillColor(sf::Color(100, 250, 50));
-
-  sf::Text quit_text("Quit", font, 24);
-  quit_text.setColor(sf::Color::Black);*/
 
   sf::Texture bg_image;
   if (!bg_image.loadFromFile("./res/n_background_menu.jpg"))
@@ -32,20 +46,14 @@ int main()
 
   std::map<std::string, std::shared_ptr<Menu>> menus;
 
-  std::shared_ptr<Menu> menu = std::make_shared<Menu>(bg_image, BEGINM);
-  std::pair<std::string, std::shared_ptr<Menu>> temp("begin", menu);
-
-  menus.insert(temp);
-
-  menu = std::make_shared<Menu>(play_image, GAMEM);
-  menu->init_buttons(font, window.getSize());
-
-  temp = std::pair<std::string, std::shared_ptr<Menu>>("play", menu);
-  menus.insert(temp);
+  menus.insert(init_menus(bg_image, BEGINM, font, window.getSize()));
+  menus.insert(init_menus(play_image, GAMEM, font, window.getSize()));
 
   menu = menus["begin"];
 // menu.add_button(but);
-  menu->init_buttons(font, window.getSize());
+
+  menu->draw(window);
+  window.display();
   Play p{};
 
 
@@ -65,18 +73,19 @@ int main()
       }
       if (act == PLAY)
       {
-        p.update();
+        menu = menus["play"];
       }
     }
 
     window.clear();
-    if (act == PLAY)
+    menu->draw(window);
+
+    if (menu->get_type() == GAMEM)
+    {
+      p.update();
       p.draw(window);
-    else
-      menu->draw(window);
+    }
     window.display();
-
-
   }
 
   return 0;
