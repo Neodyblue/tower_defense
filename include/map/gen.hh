@@ -17,6 +17,7 @@ class Gen
     Gen(int witdh, int height);
     std::shared_ptr<std::vector<std::vector<unsigned>>> tab_;
     void init_();
+    void load_map_();
     void split_();
     void merge_();
     inline bool check_(int x, int y) const

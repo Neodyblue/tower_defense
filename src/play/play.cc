@@ -214,6 +214,7 @@ void Play::draw(sf::RenderWindow& window, sf::Font& f)
   if (nexus_touched_)
   {
     rectangle.setOutlineColor(sf::Color::Red);
+    rectangle.setFillColor(sf::Color::Red);
     nexus_touched_ = false;
   }
   else if (nexus_life_ > 10)

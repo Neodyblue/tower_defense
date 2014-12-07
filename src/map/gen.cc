@@ -1,5 +1,6 @@
 #include <ctime>
 #include <cstdlib>
+#include <fstream>
 #include <tuple>
 
 #include "map/gen.hh"
@@ -20,6 +21,19 @@ void Gen::init_()
     {
       (*tab_)[x][y] = std::rand() % 255;
     }
+}
+
+void Gen::load_map_()
+{
+  std::ifstream file("map");
+  if (file)
+  {
+    unsigned int seed = 0;
+    file >> seed;
+    srand(seed);
+    file.close();
+  }
+  init_();
 }
 
 void Gen::split_()
@@ -89,7 +103,7 @@ std::shared_ptr<std::vector<std::vector<unsigned>>> Gen::Generate(int witdh,
     int iter)
 {
   Gen g(witdh, height);
-  g.init_();
+  g.load_map_();
   for (int i = 0; i < iter; i++)
   {
     g.split_();
