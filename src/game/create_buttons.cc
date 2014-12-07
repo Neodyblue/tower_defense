@@ -69,9 +69,28 @@ std::vector<std::shared_ptr<Button>> add_game_buttons(sf::Font& f,
   but = Button(PAUSE, sf::Vector2f(39 * win_size.x / 48, 22 * win_size.y / 32),
                button, text);
 
+  tamere = std::make_shared<Button>(but);
+  sol.push_back(tamere);
+
+  button = sf::RectangleShape(sf::Vector2f(win_size.x / 8, win_size.y / 16));
+  button.setFillColor(sf::Color(0, 0, 0, 0));
+
+  text = sf::Text("Nagas: (1)Turret (100G), (6)Naga King \
+(500G),\n spawnable only on water, fast attack speed.\n\n\
+Knights: (2)Turret (50G), (7)Jaime (300G) \n \
+Spawnable only on grass, average in every stats \n\n \
+Dwarves: (3)Turret (100G), (8)Ballrog (600G) \n \
+Spawnable only in mountains, heavy attacks. \n\n \
+Elves: (4)Turret (75G), (9)Sniper (400G) \n \
+Spawnable only in forests, crazy range!", f, 24);
+  text.setColor(sf::Color::Black);
+
+  but = Button(NIL, sf::Vector2f(300, win_size.y - 165),
+               button, text);
 
   tamere = std::make_shared<Button>(but);
   sol.push_back(tamere);
+
   return sol;
 }
 
