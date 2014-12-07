@@ -35,6 +35,7 @@ class Play
 
     long long unsigned gold_ = 100;
     int nexus_life_ = 255;
+    bool nexus_touched_ = false;
     int counter_;
 };
 

@@ -114,6 +114,7 @@ void Play::move_mobs()
         mobs_[i]->set_dir(map_.get_next(mobs_[i]->get_pos()));
       else
       {
+        nexus_touched_ = true;
         mobs_to_remove.push_back(i);
         nexus_life_ -= mobs_[i]->get_stats().get_strength();
         mobs_[i]->set_stats(MStats(0, 0, 0, false));
@@ -210,7 +211,12 @@ void Play::draw(sf::RenderWindow& window, sf::Font& f)
                         nexus_.get_y() - 5);
   rectangle.setOutlineThickness(-1);
   rectangle.setOutlineColor(sf::Color(nexus_life_, nexus_life_, nexus_life_));
-  if (nexus_life_ > 10)
+  if (nexus_touched_)
+  {
+    rectangle.setOutlineColor(sf::Color::Red);
+    nexus_touched_ = false;
+  }
+  else if (nexus_life_ > 10)
     rectangle.setFillColor(sf::Color(nexus_life_- 10,
                                      nexus_life_ - 10, nexus_life_ - 10));
   else
