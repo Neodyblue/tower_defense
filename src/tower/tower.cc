@@ -63,10 +63,18 @@ tower_target_type& Tower::get_target_type()
 
 std::shared_ptr<TAttack<Tower, Mob>> Tower::attack()
 {
-  if (!target_ || (clock_.getElapsedTime() - last_attack_).asMilliseconds()
-      <= real_stats_.get_cooldown() || target_->get_stats().get_health() <= 0)
+  if (!target_)
+    return std::shared_ptr<TAttack<Tower, Mob>>{};
+
+  if (target_->get_stats().get_health() <= 0)
   {
     target_.reset();
+    return std::shared_ptr<TAttack<Tower, Mob>>{};
+  }
+
+  if ((clock_.getElapsedTime() - last_attack_).asMilliseconds()
+      <= real_stats_.get_cooldown())
+  {
     return std::shared_ptr<TAttack<Tower, Mob>>{};
   }
 
@@ -93,7 +101,7 @@ void Tower::draw(sf::RenderWindow& window)
   {
     sf::Vertex(sf::Vector2f(target_->get_pos().get_x(),
                             target_->get_pos().get_y())),
-    sf::Vertex(sf::Vector2f(pos_.get_x(), pos_.get_y()))
+    sf::Vertex(sf::Vector2f(pos_.get_x() + 10, pos_.get_y() + 10))
   };
 
   for (auto& l : line)
