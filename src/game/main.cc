@@ -98,7 +98,7 @@ int main()
       p.input(window);
       if (pause)
         p.update();
-      p.draw(window);
+      p.draw(window, font);
     }
     window.draw(status_text);
     window.display();
