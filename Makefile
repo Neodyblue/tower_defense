@@ -14,7 +14,7 @@ OBJS=	./src/point.o \
 	./src/wave/wave.o
 
 CXX=clang++
-CXXFLAGS=-Wall -Werror -Wextra -pedantic -std=c++11 -I include -g3
+CXXFLAGS=-Wall -Werror -Wextra -pedantic -std=c++1y -I include -g3
 
 all: $(OBJS)
 	$(CXX) $(OBJS) -o tower -lsfml-system -lsfml-graphics -lsfml-window
