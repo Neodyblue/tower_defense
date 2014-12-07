@@ -160,7 +160,7 @@ void Play::draw(sf::RenderWindow& window, sf::Font& f)
   sf::Text gold(ss.str(), f, 42);
   gold.setPosition(0, 640);
   gold.setColor(sf::Color::Yellow);
-  window.Draw(gold);
+  window.draw(gold);
 }
 
 long long unsigned Play::get_gold()
