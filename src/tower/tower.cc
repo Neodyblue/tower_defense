@@ -96,8 +96,17 @@ void Tower::draw(sf::RenderWindow& window)
     octagon.setFillColor(sf::Color::White);
   else if (type_ == WOOD)
     octagon.setFillColor(sf::Color::Green);
-  else
+  else if (type_ == MOUNTAIN)
     octagon.setFillColor(sf::Color::Red);
+  else if (type_ == SUPER_WATER)
+    octagon.setFillColor(sf::Color::Cyan);
+  else if (type_ == SUPER_HUMAN)
+    octagon.setFillColor(sf::Color::Magenta);
+  else if (type_ == SUPER_WOOD)
+    octagon.setFillColor(sf::Color::Yellow);
+  else
+    octagon.setFillColor(sf::Color::Color(255, 140, 0));
+
   octagon.setPosition(pos_.get_x() + 5, pos_.get_y() + 5);
   window.draw(octagon);
 }
@@ -125,6 +134,14 @@ void Tower::draw_beam(sf::RenderWindow& window)
       l.color = sf::Color::Blue;
     if (type_ == MOUNTAIN)
       l.color = sf::Color::Black;
+    if (type_ == SUPER_HUMAN)
+      l.color = sf::Color::Magenta;
+    if (type_ == SUPER_WOOD)
+      l.color = sf::Color::Cyan;
+    if (type_ == SUPER_WATER)
+      l.color = sf::Color::Color(255, 140, 0);
+    if (type_ == SUPER_MOUNTAIN)
+      l.color = sf::Color::Yellow;
   }
 
   window.draw(line, 2, sf::Lines);
@@ -151,4 +168,58 @@ std::shared_ptr<Tower> Tower::get_humans(Point pos)
 {
   return std::make_shared<Tower>(TStats(2, 100, 1, 1000), pos,
                                  HUMAN, GROUND);
+}
+
+std::shared_ptr<Tower> Tower::get_sniper(Point pos)
+{
+  return std::make_shared<Tower>(TStats(3, 500, 1, 2000), pos,
+                                 SUPER_WOOD, GROUND);
+}
+
+std::shared_ptr<Tower> Tower::get_ballrog(Point pos)
+{
+  return std::make_shared<Tower>(TStats(8, 30, 1, 2500), pos,
+                                 SUPER_MOUNTAIN, GROUND);
+}
+
+std::shared_ptr<Tower> Tower::get_nagas_king(Point pos)
+{
+  return std::make_shared<Tower>(TStats(5, 100, 1, 1000), pos,
+                                 SUPER_WATER, GROUND);
+}
+
+std::shared_ptr<Tower> Tower::get_jaime(Point pos)
+{
+  return std::make_shared<Tower>(TStats(6, 60, 1, 1300), pos,
+                                 SUPER_HUMAN, GROUND);
+}
+
+int Tower::get_tower_price(tower_type t)
+{
+  switch (t)
+    {
+    case HUMAN:
+      return 50;
+
+    case SUPER_HUMAN:
+      return 300;
+
+    case WATER:
+      return 100;
+
+    case SUPER_WATER:
+      return 500;
+
+    case MOUNTAIN:
+      return 100;
+
+    case SUPER_MOUNTAIN:
+      return 600;
+
+    case WOOD:
+      return 75;
+
+    case SUPER_WOOD:
+      return 400;
+    }
 }

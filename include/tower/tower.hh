@@ -38,6 +38,12 @@ public:
   static std::shared_ptr<Tower> get_dwarfes(Point pos);
   static std::shared_ptr<Tower> get_nagas(Point pos);
   static std::shared_ptr<Tower> get_humans(Point pos);
+  static std::shared_ptr<Tower> get_sniper(Point pos);
+  static std::shared_ptr<Tower> get_ballrog(Point pos);
+  static std::shared_ptr<Tower> get_nagas_king(Point pos);
+  static std::shared_ptr<Tower> get_jaime(Point pos);
+
+  static int get_tower_price(tower_type t);
 
 private:
   int level_;
