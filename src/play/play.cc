@@ -16,6 +16,24 @@ Play::Play()
   level_ = 1;
 }
 
+int Play::get_life()
+{
+  return nexus_life_;
+}
+
+void Play::reset()
+{
+  mobs_.resize(0);
+  towers_.resize(0);
+  selected_tower_ = 0;
+  gold_ = 250;
+  counter_ = 0;
+  refresh_mob_ = 15;
+  level_ = 1;
+  current_wave_ = Wave(0.7f, 0.6f, 0.4f, 0.2f, 0.1f, 10);
+  nexus_life_ = 255;
+}
+
 void Play::input(sf::RenderWindow& window)
 {
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
@@ -132,6 +150,8 @@ void Play::move_mobs()
         nexus_touched_ = true;
         mobs_to_remove.push_back(i);
         nexus_life_ -= mobs_[i]->get_stats().get_strength();
+        if (nexus_life_ <= 0)
+          nexus_life_ = 0;
         mobs_[i]->set_stats(MStats(0, 0, 0, false));
       }
     }

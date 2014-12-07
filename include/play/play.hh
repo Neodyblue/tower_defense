@@ -15,9 +15,11 @@ class Play
 {
   public:
     Play();
+    void reset();
     void update();
     void input(sf::RenderWindow& window);
     void draw(sf::RenderWindow& window, sf::Font& f);
+    int get_life();
 
   private:
     void generate_mob();

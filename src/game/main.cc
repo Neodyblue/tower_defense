@@ -80,11 +80,19 @@ int main()
         window.close();
 
       if (act == PLAY)
+      {
+        p.reset();
+        pause = false;
+        status_text.setString("Game Paused");
         menu = menus["play"];
+      }
 
       if (act == QUITMENU)
+      {
         menu = menus["begin"];
-      if (act == PAUSE)
+        status_text.setString("");
+      }
+      if (act == PAUSE && p.get_life())
       {
         if (!(pause = !pause))
           status_text.setString("Game Paused");
@@ -99,9 +107,14 @@ int main()
 
     if (menu->get_type() == GAMEM)
     {
-      p.input(window);
-      if (pause)
-        p.update();
+      if (p.get_life() != 0)
+      {
+        p.input(window);
+        if (pause)
+          p.update();
+      }
+      else
+          status_text.setString("    The Game\nyou just lose it");
       p.draw(window, font);
     }
     window.draw(status_text);
