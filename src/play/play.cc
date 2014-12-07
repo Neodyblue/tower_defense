@@ -3,7 +3,7 @@
 #include "play/play.hh"
 
 Play::Play()
-  : map_(5, 5, 7)
+  : map_(10, 5, 7)
 {
   portals_ = map_.get_portals();
   nexus_ = map_.and_get();
