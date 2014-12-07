@@ -34,6 +34,7 @@ class Play
     int selected_tower_ = 0;
 
     long long unsigned gold_ = 100;
+    int nexus_life_ = 255;
     int counter_;
 };
 

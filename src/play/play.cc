@@ -115,9 +115,8 @@ void Play::move_mobs()
       else
       {
         mobs_to_remove.push_back(i);
-        //TODO decr nexus
-        mobs_[i]->set_stats(MStats(mobs_[i]->get_stats().get_strength(),
-                                   0, 0, false));
+        nexus_life_ -= mobs_[i]->get_stats().get_strength();
+        mobs_[i]->set_stats(MStats(0, 0, 0, false));
       }
     }
   }
@@ -205,4 +204,16 @@ void Play::draw(sf::RenderWindow& window, sf::Font& f)
   gold.setPosition(0, 640);
   gold.setColor(sf::Color::Black);
   window.draw(gold);
+
+  sf::RectangleShape rectangle(sf::Vector2f(CASE_SIZE, CASE_SIZE));
+  rectangle.setPosition(nexus_.get_x() - 5,
+                        nexus_.get_y() - 5);
+  rectangle.setOutlineThickness(-1);
+  rectangle.setOutlineColor(sf::Color(nexus_life_, nexus_life_, nexus_life_));
+  if (nexus_life_ > 10)
+    rectangle.setFillColor(sf::Color(nexus_life_- 10,
+                                     nexus_life_ - 10, nexus_life_ - 10));
+  else
+    rectangle.setFillColor(sf::Color(nexus_life_, nexus_life_, nexus_life_));
+  window.draw(rectangle);
 }
