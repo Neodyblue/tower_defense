@@ -68,10 +68,8 @@ Point Mob::get_dir()
 void Mob::draw(sf::RenderWindow& window)
 {
   sf::CircleShape octagon(5, 8);
-  //float coeff = stats_.get_health() / real_stats_.get_health();
-  //int coeff = 1;
-  //octagon.setFillColor(sf::Color(255 * coeff, 255 * coeff, 255 * coeff, 0));
-  octagon.setFillColor(sf::Color::Cyan);
+  float coeff = 255.f * real_stats_.get_health() / stats_.get_health()  ;
+  octagon.setFillColor(sf::Color(coeff, coeff, coeff, 255));
   octagon.setPosition(pos_.get_x() - 5, pos_.get_y() - 5);
   window.draw(octagon);
 }
