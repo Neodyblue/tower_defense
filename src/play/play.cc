@@ -8,7 +8,7 @@ Play::Play()
 {
   portals_ = map_.get_portals();
   nexus_ = map_.and_get();
-  towers_.push_back(std::make_shared<Tower>(TStats(1, 30, 1, 500),
+  towers_.push_back(std::make_shared<Tower>(TStats(1, 80, 1, 1000),
                     Point(nexus_.get_x() + 10, nexus_.get_y() + 10),
                     HUMAN,
                     GROUND));
@@ -19,7 +19,7 @@ void Play::generate_mob()
   if (counter_ % 60 == 0)
   {
     Point p = portals_[rand() % portals_.size()];
-    mobs_.push_back(std::make_shared<Mob>(p, MStats(1, rand() % 9 + 1, false)));
+    mobs_.push_back(std::make_shared<Mob>(p, MStats(1, 1, false)));
     mobs_[mobs_.size() - 1]->set_dir(p);
   }
 
@@ -37,7 +37,10 @@ void Play::move_mobs()
       if (mobs_[i]->get_pos() != nexus_)
         mobs_[i]->set_dir(map_.get_next(mobs_[i]->get_pos()));
       else
+      {
         mobs_to_remove.push_back(i);
+        mobs_[i]->set_stats(MStats(0, 0, false));
+      }
     }
   }
 
