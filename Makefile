@@ -1,5 +1,4 @@
-OBJS=./src/main2.o \
-	./src/point.o \
+OBJS=	./src/point.o \
 	./src/mob/mob_stats.o \
 	./src/mob/mob.o \
 	./src/entity/entity.o \

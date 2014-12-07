@@ -15,6 +15,7 @@ class Play
   public:
     Play();
     void update();
+    void input(sf::RenderWindow& window);
     void draw(sf::RenderWindow& window);
 
   private:
@@ -28,6 +29,7 @@ class Play
     std::vector<std::shared_ptr<Tower>> towers_;
     std::vector<Point> portals_;
     Point nexus_;
+    int selected_tower_ = 0;
 
     int counter_;
 };

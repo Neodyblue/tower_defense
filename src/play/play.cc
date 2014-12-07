@@ -1,3 +1,4 @@
+#include <SFML/Window.hpp>
 #include <iostream>
 
 #include "play/play.hh"
@@ -14,6 +15,35 @@ Play::Play()
                     GROUND));
 }
 
+void Play::input(sf::RenderWindow& window)
+{
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
+    selected_tower_ = 0;
+  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+    selected_tower_ = 1;
+  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
+    selected_tower_ = 2;
+  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
+    selected_tower_ = 3;
+  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4))
+    selected_tower_ = 4;
+  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5))
+    selected_tower_ = 5;
+  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6))
+    selected_tower_ = 6;
+  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7))
+    selected_tower_ = 7;
+  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num8))
+    selected_tower_ = 8;
+  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num9))
+    selected_tower_ = 9;
+
+  if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+  {
+    sf::Vector2i v = sf::Mouse::getPosition(window);
+    Point p(v.x, v.y);
+  }
+}
 void Play::generate_mob()
 {
   if (counter_ % 60 == 0)

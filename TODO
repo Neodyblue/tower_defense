@@ -1,1 +1,3 @@
-REMOVE .YCM CONFIG (ne pas effacer avant le rendu)
+Mob : tuez si vie <= 0;
+Mob : Retie si le nexus est touché
+Ajouter tours (0-9)
