@@ -62,8 +62,11 @@ tower_target_type& Tower::get_target_type()
 std::shared_ptr<TAttack<Tower, Mob>> Tower::attack()
 {
   if (!target_ || (clock_.getElapsedTime() - last_attack_).asMilliseconds()
-      <= real_stats_.get_cooldown())
+      <= real_stats_.get_cooldown() || target_->get_stats().get_health() <= 0)
+  {
+    target_.reset();
     return std::shared_ptr<TAttack<Tower, Mob>>{};
+  }
 
   last_attack_ = clock_.getElapsedTime();
 
