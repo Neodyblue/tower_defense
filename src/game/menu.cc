@@ -11,9 +11,17 @@ Menu::Menu(sf::Texture& sprite, enum menu_type type) : texture_(sprite),
                                                       bg_img_(texture_),
                                                       type_(type)
 {
-  sf::FloatRect rect = bg_img_.getGlobalBounds();
-
-  bg_img_.setScale(1280 / rect.width, 1024 / rect.height);
+  if (type_ == BEGINM)
+  {
+    sf::FloatRect rect = bg_img_.getGlobalBounds();
+    bg_img_.setScale(1280 / rect.width, 1024 / rect.height);
+  }
+  if (type_ == GAMEM)
+  {
+    sf::FloatRect rect = bg_img_.getGlobalBounds();
+    bg_img_.setScale(1280 / rect.width, 1);
+    bg_img_.setPosition(0, 640);
+  }
 }
 
 void Menu::draw(sf::RenderWindow& window) const
