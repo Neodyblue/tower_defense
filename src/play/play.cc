@@ -1,18 +1,15 @@
 #include <SFML/Window.hpp>
 #include <iostream>
+#include "tower/tower_type.hh"
 
 #include "play/play.hh"
 
 Play::Play()
-  : map_(5, 5, 7)
+  : map_(10, 5, 7)
   , counter_(0)
 {
   portals_ = map_.get_portals();
   nexus_ = map_.and_get();
-  towers_.push_back(std::make_shared<Tower>(TStats(1, 80, 1, 1000),
-                    Point(nexus_.get_x() + 10, nexus_.get_y() + 10),
-                    HUMAN,
-                    GROUND));
 }
 
 void Play::input(sf::RenderWindow& window)
@@ -42,6 +39,15 @@ void Play::input(sf::RenderWindow& window)
   {
     sf::Vector2i v = sf::Mouse::getPosition(window);
     Point p(v.x, v.y);
+    tower_type t = HUMAN;
+    if (map_.can_build(p, t))
+    {
+      p = map_.get_build_position(p);
+      towers_.push_back(std::make_shared<Tower>(TStats(1, 80, 1, 1000),
+            p,
+            HUMAN,
+            GROUND));
+    }
   }
 }
 void Play::generate_mob()
@@ -145,3 +151,9 @@ void Play::draw(sf::RenderWindow& window)
   for (auto tower : towers_)
     tower->draw(window);
 }
+
+/*
+void Play::add_tower_(Point p)
+{
+}
+*/

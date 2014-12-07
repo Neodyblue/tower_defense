@@ -99,6 +99,7 @@ int main()
 
     if (menu->get_type() == GAMEM)
     {
+      p.input(window);
       if (pause)
         p.update();
       p.draw(window);

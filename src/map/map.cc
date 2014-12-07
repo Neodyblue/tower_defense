@@ -244,6 +244,8 @@ int Map::get_height_pixel() const
 bool Map::can_build(Point& p, tower_type t)
 {
   Type type = get_case(p.get_x() / CASE_SIZE, p.get_y() / CASE_SIZE);
+  if (type >= Type::NONE)
+    return 0;
   if (t == HUMAN)
     return 0 != (type & Type::BEACH);
   if (t == MOUNTAIN)
@@ -259,8 +261,8 @@ bool Map::can_build(Point& p, tower_type t)
 Point Map::get_build_position(Point& p)
 {
   case_[p.get_x() / CASE_SIZE][p.get_y() / CASE_SIZE] = Type::TOWER;
-  return Point(p.get_x() - (p.get_x() % CASE_SIZE) + CASE_SIZE / 2,
-               p.get_y() - (p.get_y() % CASE_SIZE) + CASE_SIZE / 2);
+  return Point(p.get_x() - (p.get_x() % CASE_SIZE) - CASE_SIZE / 2,
+               p.get_y() - (p.get_y() % CASE_SIZE) - CASE_SIZE / 2);
 }
 
 Point Map::and_get()

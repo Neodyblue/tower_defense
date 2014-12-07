@@ -24,6 +24,8 @@ class Play
     void set_targets();
     void attack();
     void remove_deads();
+    void add_tower_(Point p);
+
     Map map_;
     std::vector<std::shared_ptr<Mob>> mobs_;
     std::vector<std::shared_ptr<Tower>> towers_;
