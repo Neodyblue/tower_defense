@@ -25,6 +25,9 @@ std::pair<std::string, std::shared_ptr<Menu>> init_menus(sf::Texture& bg_img,
 
 int main()
 {
+  sf::Clock clock;
+  sf::Time time = clock.getElapsedTime();;
+  bool pause = true;
   std::shared_ptr<Menu> menu;
 
   sf::RenderWindow window(sf::VideoMode(1280, 1024), "Best Game");
@@ -33,13 +36,15 @@ int main()
 
   if (!font.loadFromFile("./res/Livingst.ttf"))
     return 1;
-
+  sf::Text status_text("", font, 42);
+  status_text.setColor(sf::Color::Red);
+  status_text.setPosition(550, 0);
   sf::Texture bg_image;
   if (!bg_image.loadFromFile("./res/n_background_menu.jpg"))
       return 1;
 
   sf::Texture play_image;
-  if (!play_image.loadFromFile("./res/n_background_menu.jpg"))
+  if (!play_image.loadFromFile("./res/play.jpeg"))
     return 1;
 
 //  Button but(QUIT, sf::Vector2f(400, 300), button, quit_text);
@@ -64,8 +69,10 @@ int main()
 
     enum action act = menu->get_action(temp);
 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
+        && (clock.getElapsedTime() - time).asMilliseconds() >= 200.0f)
     {
+      time = clock.getElapsedTime();
       if (act == QUIT)
       {
         window.clear();
@@ -75,16 +82,28 @@ int main()
       {
         menu = menus["play"];
       }
+      if (act == QUITMENU)
+        menu = menus["begin"];
+      if (act == PAUSE)
+      {
+        if (!(pause = !pause))
+          status_text.setString("Game Paused");
+        else
+          status_text.setString("");
+      }
     }
 
     window.clear();
     menu->draw(window);
 
+
     if (menu->get_type() == GAMEM)
     {
-      p.update();
+      if (pause)
+        p.update();
       p.draw(window);
     }
+    window.draw(status_text);
     window.display();
   }
 
