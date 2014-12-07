@@ -1,0 +1,109 @@
+#Video game rush : Tower Defense
+
+##Introduction :
+
+Video game rush is a project taking place during the EPITA's Ing1. It has
+a didactic purpose and should be considered as such. The goal of this project
+is pretty straightforward : create a Tower Defense game, in 36 hours (actually
+a bit more).
+
+This project comes in two part, a mandatory one and a bonus one.
+In order to ease the work of our ACU, we will split the project's features
+regarding those two parts.
+
+##Inspiration :
+
+The worst thing about Tower Defense is repetitivity. Once you've played a
+map once or twice, you know the perfect build order and turret placement in
+order to win, or at least get as far as possible.
+
+We wanted to change this system, and decided our game will generate as many
+features as it can in apseudo random way.
+
+This may lead to some conflict with the mandatory part,but we have faith in
+our ACU's good will once he realises that he can playas many time as he wants
+and not ending up twice on the same map, with the same mob route.
+
+If you have something to remember about our project, it's that it will
+always surprise you.
+
+
+##Mandatory :
+
+The mandatory features of our project are the following :
+
+* Several (a LOT) of different maps, not hardcoded.
+* Spawn point and nexus (our base).
+* Economic (namely, bright and shiny GOLD)
+* Several types of ennemies.
+* Several types of towers.
+* This documentation
+* Display of the player's score and gold.
+
+With the boring stuff done, we could go onto the real fun.
+
+##Bonii
+
+As you may have undersood, what we wanted was random, so here comes the good
+stuff :
+
+* Procedural creation of the maps with a seed. Unless specified in the
+arguments, the seed will be given at random. You will then have a
+a different map each time you load the game.
+
+* Random creations of the waves. It will keep on getting harder as you
+play
+
+* Diffenent menus. We have a Start menu, and an in game HUD with a Pause
+button.
+
+* The towers have different types of attack, and can be placed only in
+dinsinct places (more on that in the "How to play" part), all the
+towers have different prices given their power.
+
+* Hero towers. Crazy expensives towers that owns everything (or nearly so).
+
+* buff towers, they give fix income you get at the end of each wave,
+or heal your nexus.
+
+* Dinstinct types of monster. They give various amount of gold given their
+toughness.
+
+* Menu and in game music
+
+##How to play :
+
+* Compile the project by placing yourself at its root and type make.
+
+* Launch the project by typing ./tower .
+
+* A window pops and the menu is displayed. Wait a few seconcds, your
+map is being created.
+
+* Click on "Play" (or on "Quit" if you're fed up already).
+
+* Your map is displayed, place as many turret as you can, and click on
+"Pause" to generate the first wave.
+
+** In order to place turret, refer to the tips at the bottom of the screen
+and press the according key to start a certain turret creation.
+
+** If you're tigh on time, you can press pause anytime and still be able
+to build turrest during that time.
+
+* Play until you win/lose.
+
+* replay/profit!.
+
+##Conclusion :
+
+We had a ton of fun designing and coding this project. There has been
+no fights during its entire duration (it might seem like nothing but it's
+actually a pretty big deal at EPITA). And we are proud of our final product.
+We hope you will have as much fun playing as we have.
+
+##Authors :
+
+* Quentin Coelho
+* Alexis Guiho
+* Louis Groux
