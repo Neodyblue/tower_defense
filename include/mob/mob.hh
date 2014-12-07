@@ -37,6 +37,7 @@ private:
   MStats real_stats_;
   Point dir_;
   mob_type type_;
+  int move_ = 0;
 };
 
 #endif /* end of include guard: MOB_HH */

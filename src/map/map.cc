@@ -205,7 +205,7 @@ void Map::draw(sf::RenderWindow& window)
   /*Draw Nexus*/
   sf::RectangleShape rectangle(sf::Vector2f(CASE_SIZE, CASE_SIZE));
   sf::Color c = sf::Color::Black;
-  c.a = 100;
+  c.a = 50;
   rectangle.setFillColor(c);
   /*Draw path*/
   for (unsigned i = 0; i < portals_.size(); i++)

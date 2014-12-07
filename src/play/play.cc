@@ -10,9 +10,10 @@ Play::Play()
   , counter_(0)
   , current_wave_(0.7f, 0.6f, 0.4f, 0.2f, 0.1f, 10)
 {
-  gold_ = 1000;
+  gold_ = 250;
   portals_ = map_.get_portals();
   nexus_ = map_.and_get();
+  level_ = 1;
 }
 
 void Play::input(sf::RenderWindow& window)
@@ -63,9 +64,10 @@ void Play::input(sf::RenderWindow& window)
     else
       return;
 
-    if (map_.can_build(p, t) && gold_ >= 10)
+    unsigned price = Tower::get_tower_price(t);
+    if (map_.can_build(p, t) && gold_ >= price)
     {
-      gold_ -= 10; //FIXME get towxer price
+      gold_ -= price;
       add_tower_(p, t);
     }
   }
@@ -93,7 +95,7 @@ void Play::add_tower_(Point p, tower_type t)
 
 void Play::generate_mob()
 {
-  if (counter_ % 10 == 0)
+  if (counter_ % refresh_mob_ == 0)
   {
     Point p = portals_[rand() % portals_.size()];
 
@@ -102,6 +104,13 @@ void Play::generate_mob()
     {
       mobs_.push_back(m);
       mobs_[mobs_.size() - 1]->set_dir(p);
+    }
+    else if (mobs_.size() == 0)
+    {
+      level_ *= 2;
+      if (refresh_mob_ > 3)
+        refresh_mob_--;
+      current_wave_ = Wave(0.7f, 0.6f, 0.4f, 0.2f, 0.1f, level_ * 10);
     }
   }
 

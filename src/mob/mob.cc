@@ -33,6 +33,8 @@ Mob& Mob::operator+=(TAttack<Tower, Mob>& atk)
 
 int Mob::move()
 {
+  if (++move_ % 2)
+    return 0;
   Point aux = pos_;
   if ((aux - dir_).get_manhattan() <= real_stats_.get_speed() )
   {
@@ -83,22 +85,24 @@ void Mob::draw(sf::RenderWindow& window)
   switch (type_)
     {
     case GOBLIN:
-      square.setFillColor(get_color(coeff, sf::Color::Red));
+      square.setFillColor(get_color(coeff, sf::Color(0xba, 0x42, 0x45)));
       break;
     case MINION:
-      square.setFillColor(get_color(coeff, sf::Color::Magenta));
+      square.setFillColor(get_color(coeff, sf::Color(0x6f, 0x2e, 0x3f)));
       break;
     case TROLL:
-      square.setFillColor(get_color(coeff, sf::Color::Green));
+      square.setFillColor(get_color(coeff, sf::Color(0x42, 0x61, 0x46)));
       break;
     case SKELETON:
-      square.setFillColor(get_color(coeff, sf::Color::White));
+      square.setFillColor(get_color(coeff, sf::Color(0xe5, 0xc4, 0xa4)));
       break;
     case MURLOC:
-      square.setFillColor(get_color(coeff, sf::Color::Blue));
+      square.setFillColor(get_color(coeff, sf::Color(0x4a, 0x70, 0x69)));
       break;
     }
 
+  square.setOutlineColor(sf::Color(0xc4, 0xc2, 0xb4, 100));
+  square.setOutlineThickness(-1);
   square.setPosition(pos_.get_x() - 5, pos_.get_y() - 5);
   window.draw(square);
 }

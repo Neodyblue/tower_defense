@@ -38,6 +38,8 @@ class Play
     int nexus_life_ = 255;
     bool nexus_touched_ = false;
     int counter_;
+    int refresh_mob_ = 15;
+    int level_;
     Wave current_wave_;
 };
 
