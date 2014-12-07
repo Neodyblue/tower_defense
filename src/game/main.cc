@@ -44,7 +44,7 @@ int main()
       return 1;
 
   sf::Texture play_image;
-  if (!play_image.loadFromFile("./res/play.jpeg"))
+  if (!play_image.loadFromFile("./res/scroll_test.png"))
     return 1;
 
 
