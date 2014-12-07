@@ -152,8 +152,7 @@ void Play::draw(sf::RenderWindow& window)
     tower->draw(window);
 }
 
-/*
-void Play::add_tower_(Point p)
+long long unsigned Play::get_gold()
 {
+  return gold_;
 }
-*/

@@ -18,6 +18,8 @@ class Play
     void input(sf::RenderWindow& window);
     void draw(sf::RenderWindow& window);
 
+    long long unsigned get_gold();
+
   private:
     void generate_mob();
     void move_mobs();
@@ -33,6 +35,7 @@ class Play
     Point nexus_;
     int selected_tower_ = 0;
 
+    long long unsigned gold_ = 100;
     int counter_;
 };
 
