@@ -19,6 +19,7 @@ class Play
     void draw(sf::RenderWindow& window);
 
     long long unsigned get_gold();
+    std::shared_ptr<Tower> get_select();
 
   private:
     void generate_mob();
@@ -36,6 +37,7 @@ class Play
     int selected_tower_ = 0;
 
     long long unsigned gold_ = 100;
+    std::shared_ptr<Tower> selected_;
     int counter_;
 };
 

@@ -129,7 +129,10 @@ void Play::remove_deads()
       mobs_to_remove.push_back(i);
 
   for (int i : mobs_to_remove)
+  {
+    gold_ += mobs_[i]->get_stats().get_gold();
     mobs_.erase(mobs_.begin() + i);
+  }
 }
 
 void Play::update()
@@ -155,4 +158,9 @@ void Play::draw(sf::RenderWindow& window)
 long long unsigned Play::get_gold()
 {
   return gold_;
+}
+
+std::shared_ptr<Tower> Play::get_select()
+{
+  return selected_;
 }

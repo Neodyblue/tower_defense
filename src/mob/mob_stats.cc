@@ -4,7 +4,9 @@ MStats::MStats(int health, int speed, bool fly)
   : health_(health)
   , speed_(speed)
   , fly_(fly)
-{}
+{
+  gold_ = health * speed;
+}
 
 MStats& MStats::operator+=(MStats& other)
 {
@@ -40,6 +42,11 @@ int MStats::get_health() const
 int MStats::get_speed() const
 {
   return speed_;
+}
+
+int MStats::get_gold() const
+{
+  return gold_;
 }
 
 bool MStats::is_flying() const

@@ -94,7 +94,7 @@ void Tower::draw(sf::RenderWindow& window)
   octagon.setPosition(pos_.get_x() + 5, pos_.get_y() + 5);
   window.draw(octagon);
 
-  if (!target_)
+  if (!target_ || target_->get_stats().get_health() <= 0)
     return;
 
   sf::Vertex line[] =
