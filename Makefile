@@ -10,7 +10,8 @@ OBJS=	./src/point.o \
 	./src/game/button.o \
 	./src/game/create_buttons.o \
 	./src/game/main.o \
-	./src/game/menu.o
+	./src/game/menu.o \
+	./src/wave/wave.o
 
 CXX=clang++
 CXXFLAGS=-Wall -Werror -Wextra -pedantic -std=c++1y -I include -g3
