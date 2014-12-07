@@ -1,3 +1,7 @@
-Mob : tuez si vie <= 0;
-Mob : Retie si le nexus est touché
-Ajouter tours (0-9)
+Retirez de la vie au nexus quand mob -- Game Over / WIN
+Gerez des vagues
+Ameliorer tour (cliquer dessus) -- changer couleur des tours
+Ralentissement ?
+Fermes pour revenu ?
+Heros ? -- tour sur un chemin, limité à un seul par couleur
+Map depuis un fichier ?
