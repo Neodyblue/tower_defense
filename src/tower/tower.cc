@@ -1,3 +1,5 @@
+#include <SFML/Graphics.hpp>
+
 #include "tower/tower.hh"
 
 Tower::Tower(TStats base_stats,
@@ -83,4 +85,19 @@ void Tower::draw(sf::RenderWindow& window)
   octagon.setFillColor(sf::Color::Blue);
   octagon.setPosition(pos_.get_x() + 5, pos_.get_y() + 5);
   window.draw(octagon);
+
+  if (!target_)
+    return;
+
+  sf::Vertex line[] =
+  {
+    sf::Vertex(sf::Vector2f(target_->get_pos().get_x(),
+                            target_->get_pos().get_y())),
+    sf::Vertex(sf::Vector2f(pos_.get_x(), pos_.get_y()))
+  };
+
+  for (auto& l : line)
+    l.color = sf::Color::Red;
+
+  window.draw(line, 2, sf::Lines);
 }
