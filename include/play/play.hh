@@ -20,6 +20,7 @@ class Play
     void input(sf::RenderWindow& window);
     void draw(sf::RenderWindow& window, sf::Font& f);
     int get_life();
+    int get_score();
 
   private:
     void generate_mob();
@@ -36,12 +37,15 @@ class Play
     Point nexus_;
     int selected_tower_ = 0;
 
+    int farme_ = 0;
+    int churche_ = 0;
     long long unsigned gold_ = 100;
     int nexus_life_ = 255;
     bool nexus_touched_ = false;
     int counter_;
     int refresh_mob_ = 15;
     int level_;
+    int score_;
     Wave current_wave_;
 };
 

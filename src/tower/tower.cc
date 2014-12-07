@@ -104,16 +104,30 @@ void Tower::draw(sf::RenderWindow& window)
     octagon.setFillColor(sf::Color(0xb0, 0x8d, 0x58));
   else if (type_ == SUPER_WOOD)
     octagon.setFillColor(sf::Color(0x64, 0x6c, 0x4d));
+  else if (type_ == CHURCHE)
+    octagon.setFillColor(sf::Color(0xe8, 0xaa, 0x45));
+  else if (type_ == FARME)
+    octagon.setFillColor(sf::Color(0xdc, 0xaa, 0x91));
   else
     octagon.setFillColor(sf::Color(0x6f, 0x2e, 0x3f));
 
   octagon.setPosition(pos_.get_x() + 5, pos_.get_y() + 5);
+  octagon.setOutlineColor(sf::Color(0xc4, 0xc2, 0xb4, 100));
+  octagon.setOutlineThickness(-2);
   window.draw(octagon);
 }
 
 void Tower::draw_beam(sf::RenderWindow& window)
 {
-  if (!target_ || target_->get_stats().get_health() <= 0)
+  if (type_ == FARME || type_ == CHURCHE)
+    return;
+  if (!target_)
+    return;
+
+  Point p1 = pos_;
+  Point p2 = target_->get_pos();
+  Point d = p1 - p2;
+  if (d.get_manhattan() > get_real_stats().get_range())
     return;
 
   sf::Vertex line[] =
@@ -193,12 +207,27 @@ std::shared_ptr<Tower> Tower::get_jaime(Point pos)
                                  SUPER_HUMAN, GROUND);
 }
 
+std::shared_ptr<Tower> Tower::get_farme(Point pos)
+{
+  return std::make_shared<Tower>(TStats(0, 0, 0, 0), pos,
+                                 FARME, GROUND);
+}
+
+std::shared_ptr<Tower> Tower::get_churche(Point pos)
+{
+  return std::make_shared<Tower>(TStats(0, 0, 0, 0), pos,
+                                 CHURCHE, GROUND);
+}
+
 unsigned int Tower::get_tower_price(tower_type t)
 {
   switch (t)
     {
     case HUMAN:
       return 50;
+
+    case FARME:
+      return 30;
 
     case SUPER_HUMAN:
       return 300;
@@ -220,5 +249,8 @@ unsigned int Tower::get_tower_price(tower_type t)
 
     case SUPER_WOOD:
       return 400;
+
+    case CHURCHE:
+      return 100;
     }
 }

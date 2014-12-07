@@ -42,6 +42,8 @@ public:
   static std::shared_ptr<Tower> get_ballrog(Point pos);
   static std::shared_ptr<Tower> get_nagas_king(Point pos);
   static std::shared_ptr<Tower> get_jaime(Point pos);
+  static std::shared_ptr<Tower> get_farme(Point pos);
+  static std::shared_ptr<Tower> get_churche(Point pos);
 
   static unsigned int get_tower_price(tower_type t);
 

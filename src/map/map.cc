@@ -256,7 +256,7 @@ bool Map::can_build(Point& p, tower_type t)
   Type type = get_case(p.get_x() / CASE_SIZE, p.get_y() / CASE_SIZE);
   if (type >= Type::NONE)
     return 0;
-  if (t == HUMAN || t == SUPER_HUMAN)
+  if (t == HUMAN || t == SUPER_HUMAN || t == FARME || t == CHURCHE)
     return (type == Type::BEACH || type == Type::PLAIN);
   if (t == MOUNTAIN || t == SUPER_MOUNTAIN)
     return (type == Type::MOUNTAIN|| type == Type::HIGHMOUNTAIN);

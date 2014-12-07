@@ -107,14 +107,16 @@ int main()
 
     if (menu->get_type() == GAMEM)
     {
-      if (p.get_life() != 0)
+      if (p.get_life() != 0 && p.get_score() < 10000)
       {
         p.input(window);
         if (pause)
           p.update();
       }
-      else
+      else if (p.get_life() == 0)
           status_text.setString("    The Game\nyou just lose it");
+      else
+          status_text.setString("    The Game\nyou just win it");
       p.draw(window, font);
     }
     window.draw(status_text);

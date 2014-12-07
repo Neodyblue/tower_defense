@@ -21,11 +21,19 @@ int Play::get_life()
   return nexus_life_;
 }
 
+int Play::get_score()
+{
+  return score_;
+}
+
 void Play::reset()
 {
+  score_ = 0;
+  farme_ = 0;
+  churche_ = 0;
   mobs_.resize(0);
   towers_.resize(0);
-  selected_tower_ = 0;
+  selected_tower_ = -1;
   gold_ = 250;
   counter_ = 0;
   refresh_mob_ = 15;
@@ -71,6 +79,8 @@ void Play::input(sf::RenderWindow& window)
       t = MOUNTAIN;
     else if (selected_tower_ == 4)
       t = WOOD;
+    else if (selected_tower_ == 5)
+      t = FARME;
     else if (selected_tower_ == 6)
       t = SUPER_WATER;
     else if (selected_tower_ == 7)
@@ -79,19 +89,21 @@ void Play::input(sf::RenderWindow& window)
       t = SUPER_MOUNTAIN;
     else if (selected_tower_ == 9)
       t = SUPER_WOOD;
+    else if (selected_tower_ == 0)
+      t = CHURCHE;
     else
       return;
 
-    unsigned price = Tower::get_tower_price(t);
-    if (map_.can_build(p, t) && gold_ >= price)
-    {
-      gold_ -= price;
-      add_tower_(p, t);
-    }
+    add_tower_(p, t);
+
   }
 }
 void Play::add_tower_(Point p, tower_type t)
 {
+  unsigned price = Tower::get_tower_price(t);
+  if (!(map_.can_build(p, t) && gold_ >= price))
+    return;
+  gold_ -= price;
   p = map_.get_build_position(p);
   if (t == HUMAN)
     towers_.push_back(Tower::get_humans(p));
@@ -109,6 +121,14 @@ void Play::add_tower_(Point p, tower_type t)
     towers_.push_back(Tower::get_ballrog(p));
   else if (t == SUPER_WATER)
     towers_.push_back(Tower::get_nagas_king(p));
+  else if (t == CHURCHE)
+    towers_.push_back(Tower::get_churche(p));
+  else if (t == FARME)
+    towers_.push_back(Tower::get_farme(p));
+  if (t == FARME)
+    farme_++;
+  else if (t == CHURCHE)
+    churche_++;
 }
 
 void Play::generate_mob()
@@ -125,8 +145,13 @@ void Play::generate_mob()
     }
     else if (mobs_.size() == 0)
     {
+      gold_ += 10 * farme_;
+      score_ += 10 * farme_;
+      nexus_life_ += 5 * churche_;
+      if (nexus_life_ > 255)
+        nexus_life_ = 255;
       level_ *= 2;
-      if (refresh_mob_ > 3)
+      if (refresh_mob_ >= 3)
         refresh_mob_--;
       current_wave_ = Wave(0.7f, 0.6f, 0.4f, 0.2f, 0.1f, level_ * 10);
     }
@@ -205,6 +230,7 @@ void Play::remove_deads()
     if (mobs_[i]->get_stats().get_health() <= 0)
     {
       gold_ += mobs_[i]->get_stats().get_gold();
+      score_ += mobs_[i]->get_stats().get_gold();
       mobs_to_remove.push_back(i);
     }
 
@@ -235,7 +261,7 @@ void Play::draw(sf::RenderWindow& window, sf::Font& f)
     tower->draw_beam(window);
 
   std::stringstream ss;
-  ss << gold_;
+  ss << "gold " << gold_ << "\npv " << nexus_life_ << "\nscore " << score_;
   sf::Text gold(ss.str(), f, 42);
   gold.setPosition(0, 640);
   gold.setColor(sf::Color::Black);

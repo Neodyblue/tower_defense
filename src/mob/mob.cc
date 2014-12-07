@@ -33,10 +33,11 @@ Mob& Mob::operator+=(TAttack<Tower, Mob>& atk)
 
 int Mob::move()
 {
-  if (++move_ % 2)
-    return 0;
+  move_++;
+  int speed = real_stats_.get_speed() / 2;
+  speed += move_ % 2;
   Point aux = pos_;
-  if ((aux - dir_).get_manhattan() <= real_stats_.get_speed() )
+  if ((aux - dir_).get_manhattan() <= speed)
   {
     pos_ = dir_;
     return 1;
@@ -44,16 +45,16 @@ int Mob::move()
   if (pos_.get_x() != dir_.get_x())
   {
     if (pos_.get_x() > dir_.get_x())
-      pos_.set_x(pos_.get_x() - real_stats_.get_speed());
+      pos_.set_x(pos_.get_x() - speed);
     else
-      pos_.set_x(pos_.get_x() + real_stats_.get_speed());
+      pos_.set_x(pos_.get_x() + speed);
   }
   else
   {
     if (pos_.get_y() > dir_.get_y())
-      pos_.set_y(pos_.get_y() - real_stats_.get_speed());
+      pos_.set_y(pos_.get_y() - speed);
     else
-      pos_.set_y(pos_.get_y() + real_stats_.get_speed());
+      pos_.set_y(pos_.get_y() + speed);
   }
   return 0;
 }
