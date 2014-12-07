@@ -42,6 +42,7 @@ void Play::input(sf::RenderWindow& window)
     sf::Vector2i v = sf::Mouse::getPosition(window);
     Point p(v.x, v.y);
     tower_type t;
+
     if (selected_tower_ == 1)
       t = WATER;
     else if (selected_tower_ == 2)
@@ -50,16 +51,24 @@ void Play::input(sf::RenderWindow& window)
       t = MOUNTAIN;
     else if (selected_tower_ == 4)
       t = WOOD;
+    else if (selected_tower_ == 6)
+      t = SUPER_WATER;
+    else if (selected_tower_ == 7)
+      t = SUPER_HUMAN;
+    else if (selected_tower_ == 8)
+      t = SUPER_MOUNTAIN;
+    else if (selected_tower_ == 9)
+      t = SUPER_WOOD;
     else
       return;
-    if (map_.can_build(p, t) && gold_ >= 20)
+
+    if (map_.can_build(p, t) && gold_ >= 10)
     {
-      gold_ -= 20;
+      gold_ -= 10; //FIXME get towxer price
       add_tower_(p, t);
     }
   }
 }
-
 void Play::add_tower_(Point p, tower_type t)
 {
   p = map_.get_build_position(p);
@@ -69,8 +78,16 @@ void Play::add_tower_(Point p, tower_type t)
     towers_.push_back(Tower::get_evles(p));
   else if (t == MOUNTAIN)
     towers_.push_back(Tower::get_dwarfes(p));
-  else
+  else if (t == WATER)
     towers_.push_back(Tower::get_nagas(p));
+  else if (t == SUPER_HUMAN)
+    towers_.push_back(Tower::get_jaime(p));
+  else if (t == SUPER_WOOD)
+    towers_.push_back(Tower::get_sniper(p));
+  else if (t == SUPER_MOUNTAIN)
+    towers_.push_back(Tower::get_ballrog(p));
+  else if (t == SUPER_WATER)
+    towers_.push_back(Tower::get_nagas_king(p));
 }
 
 void Play::generate_mob()

@@ -246,13 +246,13 @@ bool Map::can_build(Point& p, tower_type t)
   Type type = get_case(p.get_x() / CASE_SIZE, p.get_y() / CASE_SIZE);
   if (type >= Type::NONE)
     return 0;
-  if (t == HUMAN)
+  if (t == HUMAN || t == SUPER_HUMAN)
     return (type == Type::BEACH || type == Type::PLAIN);
-  if (t == MOUNTAIN)
+  if (t == MOUNTAIN || t == SUPER_MOUNTAIN)
     return (type == Type::MOUNTAIN|| type == Type::HIGHMOUNTAIN);
-  if (t == WATER)
+  if (t == WATER || t == SUPER_WATER)
     return (type == Type::SEA || type == Type::PROFONDSEA);
-  if (t == WOOD)
+  if (t == WOOD || t == SUPER_WOOD)
     return (type == Type::FOREST || type == Type::PROFONDFOREST);
   else
     return 0;
