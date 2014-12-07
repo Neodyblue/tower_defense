@@ -1,4 +1,5 @@
 #include <SFML/Window.hpp>
+#include <sstream>
 #include <iostream>
 #include "tower/tower_type.hh"
 
@@ -144,7 +145,7 @@ void Play::update()
   remove_deads();
 }
 
-void Play::draw(sf::RenderWindow& window)
+void Play::draw(sf::RenderWindow& window, sf::Font& f)
 {
   map_.draw(window);
 
@@ -153,6 +154,13 @@ void Play::draw(sf::RenderWindow& window)
 
   for (auto tower : towers_)
     tower->draw(window);
+
+  std::stringstream ss;
+  ss << gold_;
+  sf::Text gold(ss.str(), f, 42);
+  gold.setPosition(0, 640);
+  gold.setColor(sf::Color::Yellow);
+  window.Draw(gold);
 }
 
 long long unsigned Play::get_gold()
