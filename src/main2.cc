@@ -11,7 +11,6 @@ int main()
   window.setFramerateLimit(60);
 
 
-  sf::RectangleShape rectangle(sf::Vector2f(1, 1));
   while (window.isOpen())
   {
     sf::Event event;
