@@ -104,6 +104,7 @@ void Tower::draw(sf::RenderWindow& window)
 
 void Tower::draw_beam(sf::RenderWindow& window)
 {
+
   if (!target_ || target_->get_stats().get_health() <= 0)
     return;
 
@@ -115,7 +116,16 @@ void Tower::draw_beam(sf::RenderWindow& window)
   };
 
   for (auto& l : line)
-    l.color = sf::Color::Red;
+  {
+    if (type_ == HUMAN)
+      l.color = sf::Color::Red;
+    if (type_ == WOOD)
+      l.color = sf::Color::Green;
+    if (type_ == WATER)
+      l.color = sf::Color::Blue;
+    if (type_ == MOUNTAIN)
+      l.color = sf::Color::Black;
+  }
 
   window.draw(line, 2, sf::Lines);
 }
