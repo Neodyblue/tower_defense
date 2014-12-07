@@ -27,7 +27,6 @@ class Play
     std::vector<std::shared_ptr<Mob>> mobs_;
     std::vector<std::shared_ptr<Tower>> towers_;
     std::vector<Point> portals_;
-    std::vector<Tower> towers_;
     Point nexus_;
 
     int counter_;
