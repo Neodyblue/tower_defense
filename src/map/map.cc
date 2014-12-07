@@ -1,13 +1,23 @@
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 
 #include "map/map.hh"
 #include "map/gen.hh"
 
 Map::Map(int width, int height, int iter)
 {
-  srand(time(NULL));
+  std::ifstream file("map");
+  if (file)
+  {
+    unsigned int seed = 0;
+    file >> seed;
+    srand(seed);
+    file.close();
+  }
+  else
+    srand(time(NULL));
   auto v = Gen::Generate(width, height, iter);
   width_ = v->size();
   height_ = (*v)[0].size();
@@ -306,15 +316,15 @@ void Map::get_color(Type t, sf::Uint8& r, sf::Uint8& g, sf::Uint8& b)
 {
   if (t == Type::PROFONDSEA)
   {
-    r = 0x32;
-    g = 0x5d;
-    b = 0xe0;
+    r = 0x4e;
+    g = 0x7c;
+    b = 0x89;
   }
   else if (t == Type::SEA)
   {
-    r = 0x32;
-    g = 0x5d;
-    b = 0xe0;
+    r = 0x42;
+    g = 0x7c;
+    b = 0x89;
   }
   else if (t == Type::BEACH)
   {
@@ -324,32 +334,32 @@ void Map::get_color(Type t, sf::Uint8& r, sf::Uint8& g, sf::Uint8& b)
   }
   else if (t == Type::PLAIN)
   {
-    r = 0x02;
-    g = 0x7d;
-    b = 0x01;
+    r = 0x66;
+    g = 0x8d;
+    b = 0x5d;
   }
   else if (t == Type::FOREST)
   {
-    r = 0x00;
-    g = 0x50;
-    b = 0x00;
+    r = 0x4b;
+    g = 0x70;
+    b = 0x46;
   }
   else if (t == Type::PROFONDFOREST)
   {
-    r = 0x01;
-    g = 0x3a;
-    b = 0x03;
+    r = 0x3f;
+    g = 0x5c;
+    b = 0x3c;
   }
   else if (t == Type::MOUNTAIN)
   {
-    r = 0x6a;
-    g = 0x38;
-    b = 0x05;
+    r = 0x93;
+    g = 0x60;
+    b = 0x58;
   }
   else if (t == Type::HIGHMOUNTAIN)
   {
-    r = 0x60;
-    g = 0x2e;
-    b = 0x00;
+    r = 0x69;
+    g = 0x42;
+    b = 0x3b;
   }
 }
