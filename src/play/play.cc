@@ -8,6 +8,7 @@
 Play::Play()
   : map_(10, 5, 7)
   , counter_(0)
+  , current_wave_(0.7f, 0.6f, 0.4f, 0.2f, 0.1f, 10)
 {
   gold_ = 1000;
   portals_ = map_.get_portals();
@@ -95,8 +96,13 @@ void Play::generate_mob()
   if (counter_ % 10 == 0)
   {
     Point p = portals_[rand() % portals_.size()];
-    mobs_.push_back(std::make_shared<Mob>(p, MStats(1, 10, 2, false)));
-    mobs_[mobs_.size() - 1]->set_dir(p);
+
+    std::shared_ptr<Mob> m;
+    if ((m = current_wave_.generate(p)))
+    {
+      mobs_.push_back(m);
+      mobs_[mobs_.size() - 1]->set_dir(p);
+    }
   }
 
   counter_++;

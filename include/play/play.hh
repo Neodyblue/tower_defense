@@ -9,6 +9,7 @@
 # include "map/map.hh"
 # include "mob/mob.hh"
 # include "tower/tower.hh"
+# include "wave/wave.hh"
 
 class Play
 {
@@ -37,6 +38,7 @@ class Play
     int nexus_life_ = 255;
     bool nexus_touched_ = false;
     int counter_;
+    Wave current_wave_;
 };
 
 #endif /* !PLAY_HH */
