@@ -43,7 +43,7 @@ public:
   static std::shared_ptr<Tower> get_nagas_king(Point pos);
   static std::shared_ptr<Tower> get_jaime(Point pos);
 
-  static int get_tower_price(tower_type t);
+  static unsigned int get_tower_price(tower_type t);
 
 private:
   int level_;

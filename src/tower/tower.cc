@@ -194,7 +194,7 @@ std::shared_ptr<Tower> Tower::get_jaime(Point pos)
                                  SUPER_HUMAN, GROUND);
 }
 
-int Tower::get_tower_price(tower_type t)
+unsigned int Tower::get_tower_price(tower_type t)
 {
   switch (t)
     {
